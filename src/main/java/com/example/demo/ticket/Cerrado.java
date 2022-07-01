@@ -12,11 +12,6 @@ public class Cerrado implements EstadoTicket {
     }
 
     @Override
-    public EstadoTicket reabrir() {
-        return new Abierto();
-    }
-
-    @Override
     public EstadoTicket derivar() {
         throw new RuntimeException("Imposible derivar un ticket ya cerrado");
     }
