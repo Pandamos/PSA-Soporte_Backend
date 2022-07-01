@@ -15,4 +15,8 @@ public class Abierto implements EstadoTicket {
     public EstadoTicket derivar() {
         return null;
     }
+
+    public String getestadoId(){
+        return "abierto";
+    }
 }

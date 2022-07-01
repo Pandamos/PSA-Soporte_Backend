@@ -19,31 +19,46 @@ public class TicketController {
     }
 
     //GETS
-    @GetMapping
-    public List<Ticket> getTickets() {
-        return ticketService.getTickets();
+   @GetMapping(path = "url_server_soporte/tickets?id_producto={id_producto}&id_version={id_version}")
+    //update Ticket in system
+    public List<Ticket> getTickets(
+            @PathVariable("productoId") @RequestParam(required = false) Integer productoId,
+            @PathVariable("versionId") @RequestParam(required = false) Integer versionId) {
+        return ticketService.getTickets(productoId, versionId);
     }
 
-    @GetMapping(path = "url_server_soporte/tickets/{id_tarea}")
+
+
+            @GetMapping(path = "url_server_soporte/tickets/{id_tarea}")
     public List<Ticket> getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
         //nuestro código que busca todos los tickets asociados a una tarea y los devuelve
         return null;
     }
 
     @GetMapping(path = "url_server_soporte/cantidadTickets/{id_producto}, {id_version}")
-    public Integer getCantidadTicketsByProductoAndVersion(@PathVariable("id_producto") Integer productoId,
-                                                          @PathVariable("id_version") Integer versionId){
+    public Integer getCantidadTickets(@PathVariable("id_producto") @RequestParam(required = false) Integer productoId,
+                                      @PathVariable("id_version") @RequestParam(required = false) Integer versionId){
 
-            //buscar en la tabla correspondiente la cantidad de tickets asociados a esta versión de producto y producto
-        return ticketService.getCantidadTicketsByProductoAndVersion(productoId, versionId);
+        return ticketService.getCantidadTickets(productoId, versionId);
+    }
+
+
+    @GetMapping(path = "url_server_soporte/tickets/{id_producto}, {id_version}")
+    public List<Integer> getCantidadTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
+                                                             @PathVariable("id_version") Integer versionId) {
+        Integer cantAbiertos = ticketService.getCantidadTicketsByEstadoByProductoAndVersion(new Abierto(), productoId, versionId);
+        Integer cantCerrados = ticketService.getCantidadTicketsByEstadoByProductoAndVersion(new Cerrado(), productoId, versionId);
+
+        return List.of(cantAbiertos, cantCerrados);
     }
 
     @GetMapping(path = "url_server_soporte/tickets/{id_producto}, {id_version}")
-    public List<Ticket> geTicketsByProductoAndVersion(@PathVariable("id_producto") Integer productoId,
-                                                 @PathVariable("id_version") Integer versionId){
+    public List<List<Ticket>> getTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
+                                                                      @PathVariable("id_version") Integer versionId) {
+        List<Ticket> ticketsAbiertos = ticketService.getTicketsByEstadoByProductoAndVersion(new Abierto(), productoId, versionId);
+        List<Ticket> ticketsCerrados = ticketService.getTicketsByEstadoByProductoAndVersion(new Cerrado(), productoId, versionId);
 
-        //buscar en la tabla correspondiente los tickets asociados a esta versión de producto y producto
-        return ticketService.geTicketsByProductoAndVersion(productoId, versionId);
+        return List.of(ticketsAbiertos, ticketsCerrados);
     }
 
     // POSTS

@@ -15,4 +15,8 @@ public class Cerrado implements EstadoTicket {
     public EstadoTicket derivar() {
         throw new RuntimeException("Imposible derivar un ticket ya cerrado");
     }
+
+    public String getestadoId() {
+        return "cerrado";
+    }
 }

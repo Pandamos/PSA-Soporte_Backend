@@ -82,7 +82,6 @@ public class Ticket {
         this.estado = estado;
     }
 
-
     public DateFormat getFechaVencimiento() {
         return this.fechaVencimiento;
     }

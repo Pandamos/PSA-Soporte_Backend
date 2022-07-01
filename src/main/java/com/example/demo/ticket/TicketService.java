@@ -21,20 +21,35 @@ public class TicketService {
 
 
     //GETTERS
-    public List<Ticket> getTickets() {
+    public List<Ticket> getTickets(Integer productoId, Integer versionId) {
+        if (productoId != null && versionId != null) {
+            return ticketRepository.findTicketsByProductIdAndVersionId(productoId, versionId);
+        }
         return ticketRepository.findAll();
     }
 
-    @Transactional
-    public List<Ticket> geTicketsByProductoAndVersion(Integer productoId, Integer versionId) {
-        return ticketRepository.findAllById(List.of(productoId, versionId));
+    public List<Ticket> getTicketsByEstadoByProductoAndVersion(EstadoTicket estado, Integer productoId, Integer versionId) {
+        return ticketRepository.findTicketsByEstadoByProductIdAndVersionId(estado.getestadoId(), productoId, versionId);
     }
 
-    public Integer getCantidadTicketsByProductoAndVersion(Integer productoId, Integer versionId) {
-        List<Ticket> tickets = ticketRepository.findAllById(List.of(productoId, versionId));
+    public Integer getCantidadTickets(Integer productoId, Integer versionId) {
+        List<Ticket> tickets;
+        if (productoId != null && versionId != null) {
+            tickets =  ticketRepository.findTicketsByProductIdAndVersionId(productoId, versionId);
+        }
+        else {
+            tickets =  ticketRepository.findAll();
+        }
+        return tickets.size();
+
+    }
+
+    public Integer getCantidadTicketsByEstadoByProductoAndVersion(EstadoTicket estado, Integer productoId, Integer versionId) {
+        List<Ticket> tickets = ticketRepository.findTicketsByEstadoByProductIdAndVersionId(estado.getestadoId(), productoId, versionId);
 
         return tickets.size();
     }
+
 
     //POSTS
 
@@ -75,6 +90,7 @@ public class TicketService {
         }
 
         //hace falta actualizar la base de datos?
+        ticketRepository.save(ticket);
     }
 
 
