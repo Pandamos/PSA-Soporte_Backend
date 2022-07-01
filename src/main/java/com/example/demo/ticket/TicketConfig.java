@@ -13,10 +13,12 @@ public class TicketConfig {
     CommandLineRunner commandLineRunner(TicketRepository repository) {
         return args -> {
             Ticket ticket_1 = new Ticket(
+                    1,
                     "Descripcion del primer ticket",
                     3
             );
             Ticket ticket_2 = new Ticket (
+                    2,
                     "Descripcion del segundo ticket",
                     2
             );

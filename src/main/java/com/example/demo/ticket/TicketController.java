@@ -21,9 +21,14 @@ public class TicketController {
         return ticketService.getTickets();
     }
 
+    @GetMapping(path = "url_server_soporte/tickets/{id_tarea}")
+    public List<Ticket> getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
+        //nuestro código que busca todos los tickets asociados a una tarea y los devuelve
+        return null;
+    }
+
     @PostMapping
     //add new ticket to our system
-    //no lo puedo probar todavía, no me deja
     public void createTicket(@RequestBody Ticket ticket){
         ticketService.createTicket(ticket);
     }
@@ -36,8 +41,6 @@ public class TicketController {
             @RequestParam(required = false) Integer severidad) {
         ticketService.updateTicket(ticketId, descripcion, severidad);
     }
-
-
 
     @DeleteMapping(path = "{ticketId}")
     public void deleteTicket(@PathVariable("ticketId") Integer ticketId){

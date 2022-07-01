@@ -21,19 +21,13 @@ public class Ticket {
     private String descripcion;
     private Integer severidad;
 
-    //constructors
-    public Ticket() {
-    }
+    private EstadoTicket estado;
 
     public Ticket(Integer id, String descripcion, Integer severidad) {
         this.id = id;
         this.descripcion = descripcion;
         this.severidad = severidad;
-    }
-
-    public Ticket(String descripcion, Integer severidad) {
-        this.descripcion = descripcion;
-        this.severidad = severidad;
+        this.estado = new Abierto();
     }
 
     //getters and setters
