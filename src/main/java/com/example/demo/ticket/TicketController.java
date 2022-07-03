@@ -1,14 +1,25 @@
 package com.example.demo.ticket;
 
+import com.example.demo.cliente.Cliente;
+import com.example.demo.empleado.Empleado;
+import com.example.demo.producto.Producto;
+import com.example.demo.producto.Version;
+import com.example.demo.tarea.Tarea;
+import com.example.demo.ticket.estado.Abierto;
+import com.example.demo.ticket.estado.Cerrado;
+import com.example.demo.ticket.estado.EstadoTicket;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
-import java.security.PublicKey;
 import java.text.DateFormat;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/version1/ticket")
+@RequestMapping(path = "psa_back_soporte")//www.kdhaksdhask.com/psa_back_soporte/...
 public class TicketController {
 
     private final TicketService ticketService;
@@ -18,20 +29,15 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
+
+
     //GETS
-   @GetMapping(path = "url_server_soporte/tickets?id_producto={id_producto}&id_version={id_version}")
+   @GetMapping(path = "/tickets")
     //update Ticket in system
     public List<Ticket> getTickets(
             @PathVariable("productoId") @RequestParam(required = false) Integer productoId,
             @PathVariable("versionId") @RequestParam(required = false) Integer versionId) {
         return ticketService.getTickets(productoId, versionId);
-    }
-
-
-    @GetMapping(path = "url_server_soporte/tickets/{id_tarea}")
-    public List<Ticket> getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
-        //nuestro código que busca todos los tickets asociados a una tarea y los devuelve
-        return null;
     }
 
     @GetMapping(path = "url_server_soporte/cantidadTickets/{id_producto}, {id_version}")
@@ -41,15 +47,57 @@ public class TicketController {
         return ticketService.getCantidadTickets(productoId, versionId);
     }
 
-
-    @GetMapping(path = "url_server_soporte/tickets/{id_producto}, {id_version}")
+    @GetMapping(path = "/tickets/{id_producto}, {id_version}")
     public List<Integer> getCantidadTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
                                                              @PathVariable("id_version") Integer versionId) {
         Integer cantAbiertos = ticketService.getCantidadTicketsByEstadoByProductoAndVersion(new Abierto(), productoId, versionId);
         Integer cantCerrados = ticketService.getCantidadTicketsByEstadoByProductoAndVersion(new Cerrado(), productoId, versionId);
 
-        return List.of(cantAbiertos, cantCerrados);
+       return List.of(cantAbiertos, cantCerrados);
     }
+
+    @GetMapping //todos los productos, con sus versiones
+    public List<Producto> getAllProductos(){
+
+        //PRODUCTOS
+        Producto productoA = new Producto(
+                14, //id
+                "testing", //fase
+                "Nombre producto A" //nombre
+        );
+
+        Producto productoB = new Producto(
+                155,
+                "deployed",
+                "Nombre producto B"
+        );
+
+        Producto productoC = new Producto(
+                86,
+                "maintenance",
+                "Nombre producto C"
+        );
+
+        //VERSIONES
+        Version versionB1 = new Version(
+                10, //id
+                "0.9.8", //numero version
+                productoB, //producto
+                "Casi listo para el release. Necesita testing en el bug encontrado por el usuario" //caracteristicas
+        );
+
+        Version versionB2 = new Version(
+                145,
+                "1.0.2",
+                productoB,
+                "MVP terminado. Inicio de nueva feature"
+        );
+
+        //List<Version> versionesB = new List<>(versionB1, versionB2);
+        //productoB.setVersiones(List.of(versionB1, versionB2)); //agrego versiones al producto
+
+        return List.of(productoA, productoB, productoC);
+    } //necesito que referencien el producto y la version en algun otro lugar??
 
     @GetMapping(path = "url_server_soporte/tickets/{id_producto}, {id_version}")
     public List<List<Ticket>> getTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
@@ -60,6 +108,39 @@ public class TicketController {
         return List.of(ticketsAbiertos, ticketsCerrados);
     }
 
+    //  GETTERS del SISTEMA EXTERNO
+    public Cliente[] getClientes() {
+        final String uri = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/clientes-psa/1.0.0/m/api/clientes";
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Cliente[]> response = restTemplate.getForEntity(uri, Cliente[].class);
+        return response.getBody();
+    }
+
+    //  GETTERS de RECURSOS
+    @GetMapping(path = "/empleados")
+    public Empleado[] getEmpleados() {
+        final String uri = "https://squad5-recursos.herokuapp.com/api/empleados";
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Empleado[]> response = restTemplate.getForEntity(uri, Empleado[].class);
+        Empleado[] empleados = response.getBody();
+        return empleados;
+    }
+
+    @GetMapping(path = "/empleado")
+    public Empleado getEmpleadoById(@PathVariable("empleadoId") int empleadoId) {
+        final String uri = "https://squad5-recursos.herokuapp.com/api/empleados/{empleadoId}";
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Empleado> response = restTemplate.getForEntity(uri, Empleado.class);
+        return response.getBody();
+    }
+
+    //  GETTERS de PROJECTOS
+    @GetMapping(path = "/tickets/{id_tarea}")
+    public List<Ticket> getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
+        //nuestro código que busca todos los tickets asociados a una tarea y los devuelve
+        return null;
+    }
+
     // POSTS
     @PostMapping
     //add new ticket to our system
@@ -67,11 +148,17 @@ public class TicketController {
         ticketService.createTicket(ticket);
     }
 
-    //seguir revisando
-   // @PostMapping(path = "url_server_soporte/tickets/{id_ticket}")
-   // public void agregarTareaATicket(@RequestBody Tarea tarea, @PathVariable("id_ticket") Integer ticketId) {
-   //     tareaService.agregarTareaATicket(tarea, ticketId);
-   // }
+/*    @PostMapping(path = "https://moduloproyectos.herokuapp.com/proyectos/{id}/tareas")
+    //add new tarea to our system
+    public void createTarea(@RequestBody Tarea tarea){
+        addTareaToProyecto();
+    }*/
+
+    //seguir revisagndo
+/*    @PostMapping(path = "url_server_soporte/tickets/{id_ticket}")
+    public void agregarTareaATicket(@RequestBody Tarea tarea, @PathVariable("id_ticket") Integer ticketId) {
+        tareaService.agregarTareaATicket(tarea, ticketId);
+    }*/
 
     // @PostMapping(path = "url_server_soporte/tickets/{id_ticket}")
    // public void crearTareaParaTicket(@RequestBody Tarea tarea, @PathVariable("id_ticket") Integer ticketId) {

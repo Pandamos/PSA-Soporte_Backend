@@ -1,4 +1,4 @@
-package com.example.demo.ticket;
+package com.example.demo.ticket.estado;
 
 public interface EstadoTicket {
     EstadoTicket abrir();

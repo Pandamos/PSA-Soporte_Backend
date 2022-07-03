@@ -1,6 +1,7 @@
-package com.example.demo.ticket;
+package com.example.demo.ticket.estado;
 
-public class Abierto implements EstadoTicket {
+public class Abierto implements EstadoTicket{
+
     @Override
     public EstadoTicket abrir() {
         throw new RuntimeException("Imposible abrir o reabrir un ticket ya abierto");

@@ -1,14 +1,21 @@
 package com.example.demo.ticket;
 
+
+
+import com.example.demo.ticket.estado.EstadoTicket;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+
 @Entity
-@Table
-public class Ticket {
-    @Id
+@Table(name = "tickets")
+public class Ticket implements Serializable {
+/*
     @SequenceGenerator(
             name = "ticket_sequence",
             sequenceName = "ticket_sequence",
@@ -19,26 +26,43 @@ public class Ticket {
             strategy = GenerationType.SEQUENCE,
             generator = "ticket_sequence"
     )
+*/
 
+    @Id
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String titulo;
+
+    @Column(name = "CUIT_cliente",length = 50)
+    private String CUIT;
+
+    @Column(name = "fecha_creacion",length = 50)
+    private DateFormat fechaDeCreacion;
+
+    @Column(name = "fecha_finalizacion",length = 50)
+    private DateFormat fechaDeFinalizacion;
+
+    @Column(name = "estado",length = 50)
+    private String estado;
+
+    @Column(name = "descripcion",length = 50)
     private String descripcion;
+
+    @Column(name = "severidad",length = 50)
     private Integer severidad;
-    private DateFormat fechaVencimiento;
-    private Integer responsableId;
-    private Integer clienteId;
 
-    private EstadoTicket estado;
+    private EstadoTicket estadoCodigo;
 
-    public Ticket(Integer id, String titulo, String descripcion, Integer severidad, DateFormat fechaVencimiento, Integer idResponsable, Integer idCliente) {
+    private Version version;
+
+    public Ticket(Integer id, String descripcion, Integer severidad,DateFormat fechaDeCreacion,DateFormat fechaDeFinalizacion,String CUIT){
+        super();
         this.id = id;
-        this.titulo = titulo;
         this.descripcion = descripcion;
         this.severidad = severidad;
-        this.fechaVencimiento = fechaVencimiento;
-        this.responsableId = idResponsable;
-        this.clienteId = idCliente;
-        this.estado = new Abierto();
+        this.estado = null;
+        this.fechaDeCreacion = fechaDeCreacion;
+        this.fechaDeFinalizacion = fechaDeFinalizacion;
+        this.CUIT = CUIT;
     }
 
     //getters and setters
@@ -58,6 +82,14 @@ public class Ticket {
         this.descripcion = descripcion;
     }
 
+    public Version getVersion() {
+        return this.version;
+    }
+
+    public void setVersion(Version version) {
+        this.version = version;
+    }
+
     public Integer getSeveridad() {
         return severidad;
     }
@@ -66,35 +98,35 @@ public class Ticket {
         this.severidad = severidad;
     }
 
-     public Integer getResponsableId() {
-        return this.responsableId;
+    public DateFormat getFechaDeFinalizacion() {
+        return fechaDeFinalizacion;
     }
 
-    public void setResponsableId(Integer responsableId) {
-        this.responsableId = responsableId;
+    public void setFechaDeFinalizacion(DateFormat fechaDeFinalizacion) {
+        this.fechaDeFinalizacion = fechaDeFinalizacion;
     }
 
-    public EstadoTicket getEstado(){
-        return this.estado;
+    public DateFormat getFechaDeCreacion() {
+        return fechaDeCreacion;
     }
 
-    public void setEstado(EstadoTicket estado){
-        this.estado = estado;
+    public void setFechaDeCreacion(DateFormat fechaDeCreacion) {
+        this.fechaDeCreacion = fechaDeCreacion;
     }
 
-    public DateFormat getFechaVencimiento() {
-        return this.fechaVencimiento;
+    public String getCUIT() {
+        return CUIT;
     }
 
-    public void setFechaVencimiento(DateFormat fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
+    public void setCUIT(String CUIT) {
+        this.CUIT = CUIT;
     }
 
-    public Integer getClienteId() {
-        return this.clienteId;
+    public void cerrarTicket(){
+        this.estado = null;//new Cerrado();
     }
 
-    public void setClienteId(Integer clienteId) {
-        this.clienteId = clienteId;
+    public void reabrirTicket(){
+        this.estado = null;//new Abierto();
     }
 }

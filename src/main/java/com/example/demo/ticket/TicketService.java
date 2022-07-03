@@ -1,10 +1,18 @@
 package com.example.demo.ticket;
 
+import com.example.demo.cliente.Cliente;
+import com.example.demo.empleado.Empleado;
+import com.example.demo.ticket.estado.EstadoTicket;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -12,7 +20,35 @@ import java.util.Optional;
 @Service
 public class TicketService {
 
+    @Autowired
     private final TicketRepository ticketRepository;
+
+    //de Lau
+/*
+    @Override
+    public List<Ticket> getAllTickets(){
+        List<Ticket> tickets = new ArrayList<>();
+        ticketRepository.findAll().forEach(tickets::add);
+        return tickets;
+    }
+    @Override
+    public Optional<Ticket> getTicket(Integer id) {
+        return ticketRepository.findById(id);
+    }
+    @Override
+    public void addTicket(Ticket ticket){
+        ticketRepository.save(ticket);
+    }
+    @Override
+    public void updateTicket(Ticket ticket,Integer id){
+        ticketRepository.save(ticket);
+    }
+
+    @Override
+    public void delete(Integer id){
+        ticketRepository.deleteById(id);
+    }
+*/
 
     @Autowired
     public TicketService(TicketRepository ticketRepository) {
@@ -35,10 +71,9 @@ public class TicketService {
     public Integer getCantidadTickets(Integer productoId, Integer versionId) {
         List<Ticket> tickets;
         if (productoId != null && versionId != null) {
-            tickets =  ticketRepository.findTicketsByProductIdAndVersionId(productoId, versionId);
-        }
-        else {
-            tickets =  ticketRepository.findAll();
+            tickets = ticketRepository.findTicketsByProductIdAndVersionId(productoId, versionId);
+        } else {
+            tickets = ticketRepository.findAll();
         }
         return tickets.size();
 
@@ -55,7 +90,7 @@ public class TicketService {
 
     public void createTicket(Ticket ticket) {
         Optional<Ticket> ticketOptional = ticketRepository.findTicketById(ticket.getId());
-        if (ticketOptional.isPresent()){
+        if (ticketOptional.isPresent()) {
             throw new IllegalStateException("id tomado. Elija otro.");
         }
 
@@ -69,7 +104,7 @@ public class TicketService {
     public void updateTicket(Integer ticketId, Integer responsableId, EstadoTicket estado, Integer severidad, DateFormat fechaVencimiento, Integer clienteId) {
         Ticket ticket = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalStateException("ticket with id" + ticketId + "does not exist"));
 
-        if (responsableId != null && !Objects.equals(ticket.getResponsableId(), responsableId)) {
+        /*if (responsableId != null && !Objects.equals(ticket.getResponsableId(), responsableId)) {
             ticket.setResponsableId(responsableId);
         }
 
@@ -87,20 +122,19 @@ public class TicketService {
 
         if (clienteId != null && !Objects.equals(ticket.getClienteId(), clienteId)) {
             ticket.setClienteId(clienteId);
-        }
+        }*/
 
-        //hace falta actualizar la base de datos?
         ticketRepository.save(ticket);
     }
 
 
     //DELETES
     public void deleteTicket(Integer ticketId) {
-      boolean exists = ticketRepository.existsById(ticketId);
-      if (!exists) {
-          throw new IllegalStateException("ticket with id " + ticketId + "does not exists");
-      }
+        boolean exists = ticketRepository.existsById(ticketId);
+        if (!exists) {
+            throw new IllegalStateException("ticket with id " + ticketId + "does not exists");
+        }
 
-      ticketRepository.deleteById(ticketId);
+        ticketRepository.deleteById(ticketId);
     }
 }

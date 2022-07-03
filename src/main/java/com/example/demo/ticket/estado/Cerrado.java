@@ -1,6 +1,7 @@
-package com.example.demo.ticket;
+package com.example.demo.ticket.estado;
 
-public class Cerrado implements EstadoTicket {
+public class Cerrado implements EstadoTicket{
+
     @Override
     public EstadoTicket abrir() {
         return new Abierto();

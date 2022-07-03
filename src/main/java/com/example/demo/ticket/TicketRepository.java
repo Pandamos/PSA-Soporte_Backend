@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TicketRepository extends JpaRepository<Ticket, Integer> {
+public interface TicketRepository extends JpaRepository<Ticket,Integer> {
 
     @Query("SELECT t FROM Ticket t WHERE t.id = ?1")
     Optional<Ticket> findTicketById(Integer id);
