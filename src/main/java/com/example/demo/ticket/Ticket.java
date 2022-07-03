@@ -13,7 +13,7 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name = "tickets")
+//@Table(name = "tickets")
 public class Ticket implements Serializable {
 /*
     @SequenceGenerator(
@@ -28,26 +28,26 @@ public class Ticket implements Serializable {
     )
 */
 
-    @Id
+  //  @Id
    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "CUIT_cliente",length = 50)
+    //@Column(name = "CUIT_cliente",length = 50)
     private String CUIT;
 
-    @Column(name = "fecha_creacion",length = 50)
+    //@Column(name = "fecha_creacion",length = 50)
     private DateFormat fechaDeCreacion;
 
-    @Column(name = "fecha_finalizacion",length = 50)
+    //@Column(name = "fecha_finalizacion",length = 50)
     private DateFormat fechaDeFinalizacion;
 
-    @Column(name = "estado",length = 50)
+    //@Column(name = "estado",length = 50)
     private String estado;
 
-    @Column(name = "descripcion",length = 50)
+    //@Column(name = "descripcion",length = 50)
     private String descripcion;
 
-    @Column(name = "severidad",length = 50)
+    //@Column(name = "severidad",length = 50)
     private Integer severidad;
 
     private EstadoTicket estadoCodigo;

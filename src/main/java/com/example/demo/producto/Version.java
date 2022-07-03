@@ -5,8 +5,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 public class Version {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @Id
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String numero_version;

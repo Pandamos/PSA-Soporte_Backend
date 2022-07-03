@@ -5,8 +5,8 @@ import javax.persistence.Version;
 import java.util.List;
 
 public class Producto {
-    @Id
-    //  @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     // @Column(name = "fase", length = 50)
     private String fase;
