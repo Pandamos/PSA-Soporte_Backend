@@ -47,11 +47,14 @@ public class TicketService {
 
 
     //GETTERS
-    public List<TicketTable> getTickets(Integer productoId, Integer versionId) {
+    public List<Ticket> getTickets(Integer productoId, Integer versionId) {
         /*if (productoId != null && versionId != null) {
             return ticketRepository.findTicketsByProductIdAndVersionId(productoId, versionId);
         }*/
-        return ticketRepository.findAll();
+        List<TicketTable> ticketTableList = ticketRepository.findAll();
+        //filtrar acá los tickets
+
+        return null;
     }
 
     /*public List<TicketTable> getTicketsByEstadoByProductoAndVersion(EstadoTicket estado, Integer productoId, Integer versionId) {
@@ -89,7 +92,7 @@ public class TicketService {
 
 
     //PUTS
-    @Transactional
+    @Transactional //---- ACTUALIZAAAAR
     //Transactional me permite no usar queries de bases de datos
     public void updateTicket(Integer ticketId, Integer responsableId, EstadoTicket estado, Integer severidad, DateFormat fechaVencimiento, Integer clienteId) {
         TicketTable ticket = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalStateException("ticket with id" + ticketId + "does not exist"));

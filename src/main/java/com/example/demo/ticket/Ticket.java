@@ -19,11 +19,11 @@ public class Ticket {
     private EstadoTicket estadoTicket;
     private Version version;
 
-    //private TicketTable ticketTable;
+    private TicketTable ticketTable;
 
     public Ticket(){
         this.version = version;
-        //this.ticketTable = new TicketTable();
+        this.ticketTable = new TicketTable();
         this.estadoTicket = new Abierto();
     }
 
@@ -45,8 +45,7 @@ public class Ticket {
     //   ticketTable.setEstado(estadoTicket.getestadoId());
     //}
 
-   public void abrirTicket(TicketTable ticketTable){
+   public void abrirTicket(){
         ticketTable.setEstado(estadoTicket.getestadoId());
-        //return ticketTable;
     }
 }

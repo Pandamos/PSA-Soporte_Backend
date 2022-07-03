@@ -30,8 +30,8 @@ public class TicketTable implements Serializable {
     @Column(name = "estado",length = 50)
     private String estado;
 
-    //public TicketTable() {
-   // }
+    public TicketTable() {
+    }
 
     public TicketTable(Integer id, String descripcion, Integer severidad,DateFormat fechaDeCreacion,DateFormat fechaDeFinalizacion,String CUIT,String estado){
         super();
