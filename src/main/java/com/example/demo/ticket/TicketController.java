@@ -160,6 +160,24 @@ public class TicketController {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Empleado[]> response = restTemplate.getForEntity(uri, Empleado[].class);
         Empleado[] empleados = response.getBody();
+
+        Tarea tarea = new Tarea();
+        HttpHeaders headers = new HttpHeaders();
+        JSONObject tareaJsonObject = new JSONObject();
+
+        tareaJsonObject.put("id", tarea.getId());
+        tareaJsonObject.put("nombre", tarea.getNombre());
+        tareaJsonObject.put("descripcion", tarea.getDescripcion());
+        tareaJsonObject.put("estado", tarea.getEstado());
+        tareaJsonObject.put("fechaCreacion", tarea.getFechaCreacion());
+        tareaJsonObject.put("idTicket", tarea.getIdTicket());
+        tareaJsonObject.put("idProyecto", tarea.getIdProyecto());
+
+        HttpEntity<String> requestPost = new HttpEntity<String>(tareaJsonObject.toString(), headers);
+
+        restTemplate.postForObject("url_api_proyectos", requestPost, String.class);
+
+
     }*/
 
 
