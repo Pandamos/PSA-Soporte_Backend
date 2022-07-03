@@ -28,8 +28,7 @@ public class TicketController {
     }
 
 
-
-            @GetMapping(path = "url_server_soporte/tickets/{id_tarea}")
+    @GetMapping(path = "url_server_soporte/tickets/{id_tarea}")
     public List<Ticket> getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
         //nuestro código que busca todos los tickets asociados a una tarea y los devuelve
         return null;
@@ -68,9 +67,19 @@ public class TicketController {
         ticketService.createTicket(ticket);
     }
 
+    //seguir revisando
+   // @PostMapping(path = "url_server_soporte/tickets/{id_ticket}")
+   // public void agregarTareaATicket(@RequestBody Tarea tarea, @PathVariable("id_ticket") Integer ticketId) {
+   //     tareaService.agregarTareaATicket(tarea, ticketId);
+   // }
 
-    //PUTS
-    @PutMapping
+    // @PostMapping(path = "url_server_soporte/tickets/{id_ticket}")
+   // public void crearTareaParaTicket(@RequestBody Tarea tarea, @PathVariable("id_ticket") Integer ticketId) {
+    //    tareaService.createTareaParaTicket(tarea, ticketId);
+   // }
+
+    //PUTS y PATCHS
+    @PatchMapping
     //update Ticket in system
     public void updateTicket(
             @PathVariable("ticketId") Integer ticketId,
