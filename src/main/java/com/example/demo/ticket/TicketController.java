@@ -32,7 +32,7 @@ public class TicketController {
     //GETS
    @GetMapping(path = "/tickets")
     //update Ticket in system
-    public List<Ticket> getTickets(
+    public List<TicketTable> getTickets(
             @PathVariable("productoId") @RequestParam(required = false) Integer productoId,
             @PathVariable("versionId") @RequestParam(required = false) Integer versionId) {
         return ticketService.getTickets(productoId, versionId);
@@ -45,14 +45,14 @@ public class TicketController {
         return ticketService.getCantidadTickets(productoId, versionId);
     }
 
-    @GetMapping(path = "/tickets/{id_producto}, {id_version}")
+    /*@GetMapping(path = "/tickets/{id_producto}, {id_version}")
     public List<Integer> getCantidadTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
                                                              @PathVariable("id_version") Integer versionId) {
         Integer cantAbiertos = ticketService.getCantidadTicketsByEstadoByProductoAndVersion(new Abierto(), productoId, versionId);
         Integer cantCerrados = ticketService.getCantidadTicketsByEstadoByProductoAndVersion(new Cerrado(), productoId, versionId);
 
        return List.of(cantAbiertos, cantCerrados);
-    }
+    }*/
 
     @GetMapping //todos los productos, con sus versiones
     public List<Producto> getAllProductos(){
@@ -97,14 +97,14 @@ public class TicketController {
         return List.of(productoA, productoB, productoC);
     } //necesito que referencien el producto y la version en algun otro lugar??
 
-    @GetMapping(path = "url_server_soporte/tickets/{id_producto}, {id_version}")
-    public List<List<Ticket>> getTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
+    /*@GetMapping(path = "url_server_soporte/tickets/{id_producto}, {id_version}")
+    public List<List<TicketTable>> getTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
                                                                       @PathVariable("id_version") Integer versionId) {
-        List<Ticket> ticketsAbiertos = ticketService.getTicketsByEstadoByProductoAndVersion(new Abierto(), productoId, versionId);
-        List<Ticket> ticketsCerrados = ticketService.getTicketsByEstadoByProductoAndVersion(new Cerrado(), productoId, versionId);
+        List<TicketTable> ticketsAbiertos = ticketService.getTicketsByEstadoByProductoAndVersion(new Abierto(), productoId, versionId);
+        List<TicketTable> ticketsCerrados = ticketService.getTicketsByEstadoByProductoAndVersion(new Cerrado(), productoId, versionId);
 
         return List.of(ticketsAbiertos, ticketsCerrados);
-    }
+    }*/
 
     //  GETTERS del SISTEMA EXTERNO
     public Cliente[] getClientes() {
@@ -134,7 +134,7 @@ public class TicketController {
 
     //  GETTERS de PROJECTOS
     @GetMapping(path = "/tickets/{id_tarea}")
-    public List<Ticket> getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
+    public List<TicketTable> getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
         //nuestro código que busca todos los tickets asociados a una tarea y los devuelve
         return null;
     }
@@ -142,8 +142,9 @@ public class TicketController {
     // POSTS
     @PostMapping
     //add new ticket to our system
-    public void createTicket(@RequestBody Ticket ticket){
-        ticketService.createTicket(ticket);
+    public void createTicket(@RequestBody TicketTable ticketTable,Ticket ticket){
+        ticket.abrirTicket(ticketTable);
+        ticketService.createTicket(ticketTable);
     }
 
 

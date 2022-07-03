@@ -1,20 +1,12 @@
 package com.example.demo.ticket;
 
-import com.example.demo.cliente.Cliente;
-import com.example.demo.empleado.Empleado;
 import com.example.demo.ticket.estado.EstadoTicket;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -49,47 +41,45 @@ public class TicketService {
         ticketRepository.deleteById(id);
     }
 */
-
-    @Autowired
     public TicketService(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
     }
 
 
     //GETTERS
-    public List<Ticket> getTickets(Integer productoId, Integer versionId) {
-        if (productoId != null && versionId != null) {
+    public List<TicketTable> getTickets(Integer productoId, Integer versionId) {
+        /*if (productoId != null && versionId != null) {
             return ticketRepository.findTicketsByProductIdAndVersionId(productoId, versionId);
-        }
+        }*/
         return ticketRepository.findAll();
     }
 
-    public List<Ticket> getTicketsByEstadoByProductoAndVersion(EstadoTicket estado, Integer productoId, Integer versionId) {
+    /*public List<TicketTable> getTicketsByEstadoByProductoAndVersion(EstadoTicket estado, Integer productoId, Integer versionId) {
         return ticketRepository.findTicketsByEstadoByProductIdAndVersionId(estado.getestadoId(), productoId, versionId);
-    }
+    }*/
 
     public Integer getCantidadTickets(Integer productoId, Integer versionId) {
-        List<Ticket> tickets;
-        if (productoId != null && versionId != null) {
+        List<TicketTable> tickets;
+        /*if (productoId != null && versionId != null) {
             tickets = ticketRepository.findTicketsByProductIdAndVersionId(productoId, versionId);
-        } else {
-            tickets = ticketRepository.findAll();
-        }
+        } else {*/
+        tickets = ticketRepository.findAll();
+       //}
         return tickets.size();
 
     }
 
-    public Integer getCantidadTicketsByEstadoByProductoAndVersion(EstadoTicket estado, Integer productoId, Integer versionId) {
-        List<Ticket> tickets = ticketRepository.findTicketsByEstadoByProductIdAndVersionId(estado.getestadoId(), productoId, versionId);
+    /*public Integer getCantidadTicketsByEstadoByProductoAndVersion(EstadoTicket estado, Integer productoId, Integer versionId) {
+        List<TicketTable> tickets = ticketRepository.findTicketsByEstadoByProductIdAndVersionId(estado.getestadoId(), productoId, versionId);
 
         return tickets.size();
-    }
+    }*/
 
 
     //POSTS
 
-    public void createTicket(Ticket ticket) {
-        Optional<Ticket> ticketOptional = ticketRepository.findTicketById(ticket.getId());
+    public void createTicket(TicketTable ticket) {
+        Optional<TicketTable> ticketOptional = ticketRepository.findById(ticket.getId());
         if (ticketOptional.isPresent()) {
             throw new IllegalStateException("id tomado. Elija otro.");
         }
@@ -102,7 +92,7 @@ public class TicketService {
     @Transactional
     //Transactional me permite no usar queries de bases de datos
     public void updateTicket(Integer ticketId, Integer responsableId, EstadoTicket estado, Integer severidad, DateFormat fechaVencimiento, Integer clienteId) {
-        Ticket ticket = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalStateException("ticket with id" + ticketId + "does not exist"));
+        TicketTable ticket = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalStateException("ticket with id" + ticketId + "does not exist"));
 
         /*if (responsableId != null && !Objects.equals(ticket.getResponsableId(), responsableId)) {
             ticket.setResponsableId(responsableId);
