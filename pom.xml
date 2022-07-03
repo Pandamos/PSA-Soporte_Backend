@@ -51,12 +51,13 @@
 	</dependencies>
 
 	<build>
-		<!--<plugins>
+		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.7.1</version>
 			</plugin>
-		</plugins>-->
+		</plugins>
 	</build>
 
 </project>
