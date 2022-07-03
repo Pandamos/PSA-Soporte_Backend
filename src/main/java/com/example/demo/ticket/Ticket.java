@@ -2,6 +2,7 @@ package com.example.demo.ticket;
 
 
 
+import com.example.demo.ticket.estado.Abierto;
 import com.example.demo.ticket.estado.EstadoTicket;
 
 import javax.persistence.*;
@@ -13,53 +14,43 @@ import java.util.Objects;
 
 
 @Entity
-//@Table(name = "tickets")
+@Table(name = "tickets")
 public class Ticket implements Serializable {
-/*
-    @SequenceGenerator(
-            name = "ticket_sequence",
-            sequenceName = "ticket_sequence",
-            allocationSize = 1
-    )
 
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "ticket_sequence"
-    )
-*/
+    private EstadoTicket estadoTicket;
+    private Version version;
 
-  //  @Id
-   // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private TicketTable ticketTable;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //@Column(name = "CUIT_cliente",length = 50)
+    @Column(name = "CUIT_cliente",length = 50)
     private String CUIT;
 
-    //@Column(name = "fecha_creacion",length = 50)
+    @Column(name = "fecha_creacion",length = 50)
     private DateFormat fechaDeCreacion;
 
-    //@Column(name = "fecha_finalizacion",length = 50)
+    @Column(name = "fecha_finalizacion",length = 50)
     private DateFormat fechaDeFinalizacion;
 
     //@Column(name = "estado",length = 50)
-    private String estado;
+    //private String estado;
 
-    //@Column(name = "descripcion",length = 50)
+    @Column(name = "descripcion",length = 50)
     private String descripcion;
 
-    //@Column(name = "severidad",length = 50)
+    @Column(name = "severidad",length = 50)
     private Integer severidad;
 
-    private EstadoTicket estadoCodigo;
-
-    private Version version;
 
     public Ticket(Integer id, String descripcion, Integer severidad,DateFormat fechaDeCreacion,DateFormat fechaDeFinalizacion,String CUIT){
         super();
         this.id = id;
         this.descripcion = descripcion;
         this.severidad = severidad;
-        this.estado = null;
+        //this.estadoTicket = new Abierto();
+       // this.estado = estadoTicket.getestadoId();
         this.fechaDeCreacion = fechaDeCreacion;
         this.fechaDeFinalizacion = fechaDeFinalizacion;
         this.CUIT = CUIT;
@@ -122,11 +113,11 @@ public class Ticket implements Serializable {
         this.CUIT = CUIT;
     }
 
-    public void cerrarTicket(){
-        this.estado = null;//new Cerrado();
-    }
+    //public void cerrarTicket(){
+    //    this.estado = null;//new Cerrado();
+    //}
 
-    public void reabrirTicket(){
-        this.estado = null;//new Abierto();
-    }
+   // public void reabrirTicket(){
+   //     this.estado = null;//new Abierto();
+   // }
 }

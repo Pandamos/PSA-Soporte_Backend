@@ -21,14 +21,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "psa_back_soporte")//www.kdhaksdhask.com/psa_back_soporte/...
 public class TicketController {
-
+    @Autowired
     private final TicketService ticketService;
 
-    @Autowired
     public TicketController(TicketService ticketService) {
         this.ticketService = ticketService;
     }
-
 
 
     //GETS
@@ -40,7 +38,7 @@ public class TicketController {
         return ticketService.getTickets(productoId, versionId);
     }
 
-    @GetMapping(path = "url_server_soporte/cantidadTickets/{id_producto}, {id_version}")
+    @GetMapping(path = "/cantidadTickets/{id_producto}-{id_version}")
     public Integer getCantidadTickets(@PathVariable("id_producto") @RequestParam(required = false) Integer productoId,
                                       @PathVariable("id_version") @RequestParam(required = false) Integer versionId){
 
@@ -148,25 +146,9 @@ public class TicketController {
         ticketService.createTicket(ticket);
     }
 
-/*    @PostMapping(path = "https://moduloproyectos.herokuapp.com/proyectos/{id}/tareas")
-    //add new tarea to our system
-    public void createTarea(@RequestBody Tarea tarea){
-        addTareaToProyecto();
-    }*/
-
-    //seguir revisagndo
-/*    @PostMapping(path = "url_server_soporte/tickets/{id_ticket}")
-    public void agregarTareaATicket(@RequestBody Tarea tarea, @PathVariable("id_ticket") Integer ticketId) {
-        tareaService.agregarTareaATicket(tarea, ticketId);
-    }*/
-
-    // @PostMapping(path = "url_server_soporte/tickets/{id_ticket}")
-   // public void crearTareaParaTicket(@RequestBody Tarea tarea, @PathVariable("id_ticket") Integer ticketId) {
-    //    tareaService.createTareaParaTicket(tarea, ticketId);
-   // }
 
     //PUTS y PATCHS
-    @PatchMapping
+    @PutMapping
     //update Ticket in system
     public void updateTicket(
             @PathVariable("ticketId") Integer ticketId,
