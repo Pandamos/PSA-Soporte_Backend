@@ -1,19 +1,22 @@
 package com.example.demo.tarea;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Proyecto {
 
-    private Integer proyectoId;
-
+    @JsonProperty("id")
+    private Integer id;
+    @JsonProperty("nombre")
     private String nombre;
-
+    @JsonProperty("estado")
     private String estado;
-
+    @JsonProperty("fechaInicio")
     private String fechaInicio;
-
+    @JsonProperty("fechaFin")
     private String fechaFin;
-
+    @JsonProperty("descripcion")
     private String descripcion;
-
+    @JsonProperty("legajoLider")
     private long legajoLider;
 
     public Proyecto(){

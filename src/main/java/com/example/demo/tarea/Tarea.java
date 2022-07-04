@@ -12,14 +12,13 @@ public class Tarea {
     private Integer idProyecto;
     private Integer idTicket;
     private String nombre;
-
-    private DateFormat fechaCreacion;
+    private String fechaCreacion;
 
     public Tarea(){
 
     }
 
-    public Tarea(String descripcion, DateFormat fechaCreacion,
+    public Tarea(String descripcion, String fechaCreacion,
                  String estado, Integer id, Integer idProyecto, Integer idTicket, String nombre) {
         this.descripcion = descripcion;
         this.estado = estado;
@@ -78,11 +77,11 @@ public class Tarea {
         this.nombre = nombre;
     }
 
-    public DateFormat getFechaCreacion() {
+    public String getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(DateFormat fechaCreacion){
+    public void setFechaCreacion(String fechaCreacion){
         this.fechaCreacion = fechaCreacion;
     }
 }
