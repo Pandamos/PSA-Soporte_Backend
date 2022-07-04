@@ -26,10 +26,9 @@ public class TicketController {
 
 
     //GETS
-   @GetMapping(path = "/ticket_table")
+   @GetMapping(path = "/ticket/{versionId}")
     //update Ticket in system
-    public Iterable<TicketTable> getTickets(
-            @PathVariable("versionId") @RequestParam(required = false) Integer versionId) {
+    public List<Ticket> getTickets(@PathVariable Integer versionId) {
         return ticketService.getTickets(versionId);
     }
 
