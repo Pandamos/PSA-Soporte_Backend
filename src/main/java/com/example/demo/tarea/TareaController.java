@@ -14,25 +14,13 @@ import java.util.Arrays;
 
 @CrossOrigin(origins = "", allowedHeaders = "", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
 @RestController
-@RequestMapping(path = "/proyecto")
-
+@RequestMapping(path = "proyecto")
 public class TareaController {
-
-    @Autowired
-    RestTemplate restTemplate;
-
-    @Autowired
-    TicketService ticketService;
-    //private final TicketService ticketService;
-
-    /*public TareaController() {
-        this.ticketService = ticketService;
-    }*/
-
 
     @GetMapping(path = "/ticket_table/{id_tarea}") //ayuda de fer -- revisar
     public TicketTable[] getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + tareaId;
+        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<TicketTable[]> response = restTemplate.getForEntity(uri, TicketTable[].class);
         TicketTable[] tickets = response.getBody();
         return tickets;
