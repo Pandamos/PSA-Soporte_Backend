@@ -26,7 +26,7 @@ import java.text.DateFormat;
 import java.util.*;
 
 @RestController
-@RequestMapping(path = "https://primera-subida-psa.herokuapp.com")//www.kdhaksdhask.com/psa_back_soporte/...
+@RequestMapping(path = "/psa_back_soporte")
 public class TicketController {
     @Autowired
     private final TicketService ticketService;
