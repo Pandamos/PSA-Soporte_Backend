@@ -3,7 +3,6 @@ package com.example.demo.producto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Producto {
     @JsonProperty("id")
@@ -12,7 +11,8 @@ public class Producto {
     private String fase;
     @JsonProperty("nombre")
     private String nombre;
-    private List<VersionProducto> versiones;
+    @JsonProperty("versiones")
+    private ArrayList<VersionProducto> versiones;
 
     public Producto(Integer id, String fase, String nombre) {
         this.fase = fase;
