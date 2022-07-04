@@ -23,12 +23,12 @@ public class Proyecto {
 
     }
 
-    public Integer getProyectoId(){
-        return proyectoId;
+    public Integer getId(){
+        return id;
     }
 
-    public void setProyectoId(Integer proyectoId){
-        this.proyectoId = proyectoId;
+    public void setId(Integer id){
+        this.id = id;
     }
 
     public String getNombre(){

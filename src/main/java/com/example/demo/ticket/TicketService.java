@@ -36,7 +36,6 @@ public class TicketService {
 
     }
 
-
     //POSTS
 
     public TicketTable createTicket(TicketTable ticket) {

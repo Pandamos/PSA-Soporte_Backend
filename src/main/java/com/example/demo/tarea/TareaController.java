@@ -69,17 +69,8 @@ public class TareaController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        tarea.setIdTicket(ticketId);
 
-        /*JSONObject tareaJsonObject = new JSONObject();
-
-        tareaJsonObject.put("id", tarea.getId());
-        tareaJsonObject.put("nombre", tarea.getNombre());
-        tareaJsonObject.put("descripcion", tarea.getDescripcion());
-        tareaJsonObject.put("estado", tarea.getEstado());
-        tareaJsonObject.put("fechaCreacion", tarea.getFechaCreacion());
-        tareaJsonObject.put("idTicket", tarea.getIdTicket());
-        tareaJsonObject.put("idProyecto", tarea.getIdProyecto());
-        */
         HttpEntity<Tarea> headerRequestEntity = new HttpEntity<Tarea>(tarea, headers);
 
         return restTemplate.exchange(uri, HttpMethod.POST, headerRequestEntity, String.class).getBody();
