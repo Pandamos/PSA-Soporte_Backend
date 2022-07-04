@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 @CrossOrigin(origins = "", allowedHeaders = "", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
 @RestController
-@RequestMapping(path = "proyecto")
+@RequestMapping(path = "/proyecto")
 public class TareaController {
 
     @GetMapping(path = "/ticket_table/{id_tarea}") //ayuda de fer -- revisar
