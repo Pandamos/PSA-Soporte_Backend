@@ -16,6 +16,7 @@ import java.text.DateFormat;
 import java.util.*;
 
 @RestController
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
 @RequestMapping(path = "psa_back_soporte")
 public class TicketController {
     @Autowired
@@ -35,7 +36,7 @@ public class TicketController {
     }
 
 
-    @GetMapping //todos los productos, con sus versiones
+    @GetMapping(path = "/productos") //todos los productos, con sus versiones
     public List<Producto> getProductos(){
 
         //PRODUCTOS
@@ -109,6 +110,7 @@ public class TicketController {
 
 
     //  GETTERS del SISTEMA EXTERNO
+    @GetMapping(path = "/clientes")
     public Cliente[] getClientes() {
         final String uri = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/clientes-psa/1.0.0/m/api/clientes";
         RestTemplate restTemplate = new RestTemplate();
