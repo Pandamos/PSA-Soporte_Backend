@@ -2,23 +2,21 @@ package com.example.demo.ticket;
 
 import com.example.demo.producto.Producto;
 import com.example.demo.producto.VersionProducto;
-import com.example.demo.ticket.estado.EstadoTicket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
 import java.util.*;
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
 @RequestMapping(path = "/soporte")
 public class TicketController {
     @Autowired
-    private final TicketService ticketService;
+    private TicketService ticketService;
 
-    public TicketController(TicketService ticketService) {
+    public TicketController() {
         this.ticketService = ticketService;
     }
 
