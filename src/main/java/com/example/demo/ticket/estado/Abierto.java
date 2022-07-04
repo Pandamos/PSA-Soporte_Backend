@@ -22,7 +22,12 @@ public class Abierto implements EstadoTicket{
     }
 
     @Override
-    public void cambiarEstado(String estado) {
-        
+    public EstadoTicket cambiarEstado(String estado) {
+        if(estado.equals("abrir")){
+            throw new RuntimeException("Imposible abrir un ticket ya abierto");
+        }
+        else {
+            return new Cerrado();
+        }
     }
 }

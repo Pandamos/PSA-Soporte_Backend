@@ -7,5 +7,5 @@ public interface EstadoTicket {
 
     String getestadoId();
 
-    void cambiarEstado(String estado);
+    EstadoTicket cambiarEstado(String estado);
 }

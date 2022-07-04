@@ -33,15 +33,16 @@ public class Ticket {
         ticketTable.setEstado(estadoTicket.getestadoId());
     }
     public void cambiarEstado(String estadoTicket){
-        this.estadoTicket.cambiarEstado(estadoTicket);
+        this.estadoTicket = this.estadoTicket.cambiarEstado(estadoTicket);
     }
 
     public void cerrarTicket(){
-       estadoTicket = new Cerrado();
+       this.estadoTicket = estadoTicket.cerrar();
        ticketTable.setEstado(estadoTicket.getestadoId());
     }
 
    public void abrirTicket(){
+       this.estadoTicket = estadoTicket.abrir();
         ticketTable.setEstado(estadoTicket.getestadoId());
    }
 

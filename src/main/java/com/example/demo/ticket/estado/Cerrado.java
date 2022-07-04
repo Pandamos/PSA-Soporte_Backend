@@ -22,8 +22,13 @@ public class Cerrado implements EstadoTicket{
     }
 
     @Override
-    public void cambiarEstado(String estado) {
-
+    public EstadoTicket cambiarEstado(String estado) {
+        if(estado.equals("cerrado")){
+            throw new RuntimeException("Imposible cerrar un ticket ya cerrado");
+        }
+        else {
+            return new Abierto();
+        }
     }
 
 }
