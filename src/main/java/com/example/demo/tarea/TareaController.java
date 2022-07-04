@@ -34,8 +34,9 @@ public class TareaController {
         RestTemplate restTemplate = new RestTemplate();
         Tarea[] tareas = restTemplate.getForEntity(uri, Tarea[].class).getBody();
 
-        if (ticketId == null)
+        if (ticketId == null) {
             return tareas;
+        }
 
         //get tareas con ticketId
         Integer tareas_len = tareas.length;
@@ -51,7 +52,7 @@ public class TareaController {
         return tareas_filtradas;
     }
 
-    @GetMapping (path = "/proyectos")
+    @GetMapping (path = "/proyectos") //PROBADO!
     public Proyecto[] getProyectos() {
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos";
         RestTemplate restTemplate = new RestTemplate();
