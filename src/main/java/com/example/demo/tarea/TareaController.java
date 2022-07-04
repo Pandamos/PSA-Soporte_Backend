@@ -17,7 +17,7 @@ import java.util.Arrays;
 @RequestMapping(path = "/proyectos")
 public class TareaController {
 
-    @PostMapping(path = "/{id_ticket}/tareas")
+    @PostMapping(path = "/{id_ticket}/tareas") //
     //add new tarea to our system
     public String createTarea(@PathParam("id_ticket") Integer ticketId, @RequestBody Tarea tarea){
         final String uri = "https://moduloproyectos.herokuapp.com/" + tarea.getId() + "/tareas";
@@ -41,8 +41,8 @@ public class TareaController {
         return response;
     }
 
-    @GetMapping(path = "/ticket_table/{id_tarea}")
-    public TicketTable[] getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
+    @GetMapping(path = "/ticket_table/{id_tarea}") //
+    public TicketTable[] getTicketByTarea(@PathVariable("id_tarea") Integer tareaId) {
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + tareaId;
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<TicketTable[]> response = restTemplate.getForEntity(uri, TicketTable[].class);
@@ -50,7 +50,7 @@ public class TareaController {
         return tickets;
     }
 
-    @GetMapping (path = "/tareas")
+    @GetMapping (path = "/tareas") //PROBADO
     public Tarea[] getTareas(@PathVariable @RequestParam (required = false) Integer ticketId) {
         //get todas las tareas -- PROBADO
         final String uri = "https://moduloproyectos.herokuapp.com/tareas";
@@ -62,7 +62,7 @@ public class TareaController {
             return tareas;
         }
 
-        //get tareas con ticketId
+        //get tareas con ticketId -- PROBADO
         Integer tareas_len = tareas.length;
         Tarea[] tareas_filtradas = new Tarea[tareas_len];
         int j = 0;
@@ -85,9 +85,11 @@ public class TareaController {
         return proyectos;
     }
 
-    @PostMapping (path = "/updateTarea/{id_proyecto}")
+    @PostMapping (path = "/updateTarea/{id_proyecto}") //
     //link tarea to ticket
-    public String updateTarea(@PathParam("id_proyecto") Integer idProyecto, @RequestBody Tarea tarea, @RequestBody TicketTable ticketTable) {
+    public String updateTarea(@PathParam("id_proyecto") Integer idProyecto,
+                              @RequestBody Tarea tarea,
+                              @RequestBody TicketTable ticketTable) {
         //mandamos el ticket a los de proyectos
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas" + tarea.getId();
 

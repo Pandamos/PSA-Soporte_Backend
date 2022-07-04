@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @RestController
@@ -109,8 +110,8 @@ public class TicketController {
                                                         @RequestParam(required = false) String cuit,
                                                         @RequestParam(required = false) String estado,
                                                         @RequestParam(required = false) Integer severidad,
-                                                        @RequestParam(required = false) Integer fechaVencimiento,
-                                                        @RequestParam(required = false) Integer fechaInicial,
+                                                        @RequestParam(required = false) LocalDate  fechaVencimiento,
+                                                        @RequestParam(required = false) LocalDate fechaInicial,
                                                         @RequestParam(required = false) String descripcion) {
 
         TicketTable ticketTableResponse = ticketService.updateTicket(ticketId, cuit, estado, severidad,
