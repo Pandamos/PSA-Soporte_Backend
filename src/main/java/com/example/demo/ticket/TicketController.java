@@ -15,7 +15,7 @@ import java.text.DateFormat;
 import java.util.*;
 
 @RestController
-@RequestMapping(path = "psa_back_soporte")//www.kdhaksdhask.com/psa_back_soporte/...
+@RequestMapping(path = "https://primera-subida-psa.herokuapp.com")//www.kdhaksdhask.com/psa_back_soporte/...
 public class TicketController {
     @Autowired
     private final TicketService ticketService;
@@ -47,7 +47,7 @@ public class TicketController {
         //Integer cantCerrados = ticketService.getCantidadTicketsByEstadoByProductoAndVersion(new Cerrado(), productoId, versionId);
 
        //return List.of(cantAbiertos, cantCerrados);
-        return null;
+        return new ArrayList<>();
     }
 
     @GetMapping //todos los productos, con sus versiones
@@ -91,7 +91,7 @@ public class TicketController {
         //productoB.setVersiones(List.of(versionB1, versionB2)); //agrego versiones al producto
 
        // return List.of(productoA, productoB, productoC);
-        return null;
+        return new ArrayList<Producto>();
     }
 
     @GetMapping(path = "url_server_soporte/ticket_table/{id_producto}, {id_version}")
@@ -102,7 +102,8 @@ public class TicketController {
 
        // return List.of(ticketsAbiertos, ticketsCerrados);
         //return List.of(null, null);
-        return null;
+        ArrayList<Ticket> tickets = new ArrayList<>();
+        return new ArrayList<>();
     }
 
     //  GETTERS del SISTEMA EXTERNO
@@ -139,7 +140,7 @@ public class TicketController {
         ResponseEntity<Tarea[]> response = restTemplate.getForEntity(uri, Tarea[].class);
         Tarea[] tareas = response.getBody();
        // return new ArrayList<>(List.of(tareas));
-        return null;
+        return new ArrayList<>();
     }
 
     // POSTS
