@@ -108,16 +108,16 @@ public class TicketController {
     //PUTS y PATCHS
     @PutMapping(path = "/ticket/{ticketId}")
     //update Ticket in systemD
-    public ResponseEntity<TicketTable>  updateTicket(
-            @PathVariable("ticketId") Integer ticketId,
-            @RequestParam(required = false) String cuit,
-            @RequestParam(required = false) EstadoTicket Estado,
-            @RequestParam(required = false) Integer severidad,
-            @RequestParam(required = false) DateFormat fechaVencimiento,
-            @RequestParam(required = false) DateFormat fechaInicial,
-            @RequestParam(required = false) String descripcion) {
-        TicketTable ticketTableResponse = ticketService.updateTicket(ticketId, cuit, Estado, severidad,
-                                                                    fechaVencimiento, fechaInicial, descripcion);
+    public ResponseEntity<TicketTable>  updateTicket(   @PathVariable("ticketId") Integer ticketId,
+                                                        @RequestParam(required = false) String cuit,
+                                                        @RequestParam(required = false) String estado,
+                                                        @RequestParam(required = false) Integer severidad,
+                                                        @RequestParam(required = false) Integer fechaVencimiento,
+                                                        @RequestParam(required = false) Integer fechaInicial,
+                                                        @RequestParam(required = false) String descripcion) {
+
+        TicketTable ticketTableResponse = ticketService.updateTicket(ticketId, cuit, estado, severidad,
+                                                                     fechaVencimiento, fechaInicial, descripcion);
 
         return new ResponseEntity<>(ticketTableResponse, HttpStatus.OK);
     }

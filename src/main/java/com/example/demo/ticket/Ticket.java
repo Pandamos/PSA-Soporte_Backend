@@ -29,17 +29,17 @@ public class Ticket {
         ticketTable.setVersionId(version.getId());
     }
 
-    //public void setearEstado(){
-     //   ticketTable.setEstado(estadoTicket.getestadoId());
-    //}
-    public void cambiarEstado(EstadoTicket estadoTicket){
+    public void setearEstado(){
         ticketTable.setEstado(estadoTicket.getestadoId());
     }
+    public void cambiarEstado(String estadoTicket){
+        this.estadoTicket.cambiarEstado(estadoTicket);
+    }
 
-    //public void cerrarTicket(){
-    //   estadoTicket = new Cerrado();
-    //   ticketTable.setEstado(estadoTicket.getestadoId());
-    //}
+    public void cerrarTicket(){
+       estadoTicket = new Cerrado();
+       ticketTable.setEstado(estadoTicket.getestadoId());
+    }
 
    public void abrirTicket(){
         ticketTable.setEstado(estadoTicket.getestadoId());

@@ -6,4 +6,6 @@ public interface EstadoTicket {
     EstadoTicket derivar();
 
     String getestadoId();
+
+    void cambiarEstado(String estado);
 }

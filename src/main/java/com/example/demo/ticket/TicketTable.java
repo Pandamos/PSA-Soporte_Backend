@@ -16,10 +16,10 @@ public class TicketTable implements Serializable {
     private String cuit;
 
     @Column(name = "fecha_creacion",length = 50)
-    private DateFormat fechaDeCreacion;
+    private Integer fechaDeCreacion;
 
     @Column(name = "fecha_finalizacion",length = 50)
-    private DateFormat fechaDeFinalizacion;
+    private Integer fechaDeFinalizacion;
 
     @Column(name = "descripcion",length = 50)
     private String descripcion;
@@ -36,7 +36,7 @@ public class TicketTable implements Serializable {
     public TicketTable() {
     }
 
-    public TicketTable(Integer id, String descripcion, Integer severidad,DateFormat fechaDeCreacion,DateFormat fechaDeFinalizacion,String CUIT,String estado,Integer versionId){
+    public TicketTable(Integer id, String descripcion, Integer severidad,Integer fechaDeCreacion,Integer fechaDeFinalizacion,String CUIT,String estado,Integer versionId){
         super();
         this.id = id;
         this.descripcion = descripcion;
@@ -82,19 +82,19 @@ public class TicketTable implements Serializable {
         this.severidad = severidad;
     }
 
-    public DateFormat getFechaDeFinalizacion() {
+    public Integer getFechaDeFinalizacion() {
         return fechaDeFinalizacion;
     }
 
-    public void setFechaDeFinalizacion(DateFormat fechaDeFinalizacion) {
+    public void setFechaDeFinalizacion(Integer fechaDeFinalizacion) {
         this.fechaDeFinalizacion = fechaDeFinalizacion;
     }
 
-    public DateFormat getFechaDeCreacion() {
+    public Integer getFechaDeCreacion() {
         return fechaDeCreacion;
     }
 
-    public void setFechaDeCreacion(DateFormat fechaDeCreacion) {
+    public void setFechaDeCreacion(Integer fechaDeCreacion) {
         this.fechaDeCreacion = fechaDeCreacion;
     }
 

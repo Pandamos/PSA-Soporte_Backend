@@ -20,4 +20,9 @@ public class Abierto implements EstadoTicket{
     public String getestadoId(){
         return "abierto";
     }
+
+    @Override
+    public void cambiarEstado(String estado) {
+        
+    }
 }
