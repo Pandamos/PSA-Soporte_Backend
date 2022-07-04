@@ -27,25 +27,16 @@ public class TicketController {
 
 
     //GETS
-   @GetMapping(path = "/ticket/{versionId}")
+   @GetMapping(path = "/ticket")
     //update Ticket in system
-    public List<Ticket> getTickets(@PathVariable Integer versionId) {
-        return ticketService.getTickets(versionId);
+    public ResponseEntity<List<TicketTable>> getTickets(@PathVariable @RequestParam (required = false) Integer versionId) {
+        List<TicketTable> tickets = ticketService.getTicketsByVersion(versionId);
+        return new ResponseEntity<>(tickets, HttpStatus.OK);
     }
 
 
-    /*@GetMapping(path = "/ticket_table/{id_producto}, {id_version}")
-    public List<Integer> getCantidadTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
-                                                             @PathVariable("id_version") Integer versionId) {
-        //Integer cantAbiertos = ticketService.getCantidadTicketsByEstadoByProductoAndVersion(new Abierto(), productoId, versionId);
-        //Integer cantCerrados = ticketService.getCantidadTicketsByEstadoByProductoAndVersion(new Cerrado(), productoId, versionId);
-
-       //return List.of(cantAbiertos, cantCerrados);
-        return new ArrayList<>();
-    }*/
-
-    /*@GetMapping //todos los productos, con sus versiones
-    public List<Producto> getAllProductos(){
+    @GetMapping //todos los productos, con sus versiones
+    public List<Producto> getProductos(){
 
         //PRODUCTOS
         Producto productoA = new Producto(
@@ -67,6 +58,16 @@ public class TicketController {
         );
 
         //VERSIONES
+        VersionProducto versionProductoA = new VersionProducto(
+                3, //id
+                "0.2.4", //numero version
+                productoA, //producto
+                "Pre-Alpha" //caracteristicas
+        );
+        List<VersionProducto> versionesA = new ArrayList<>();
+        versionesA.add(versionProductoA);
+        productoA.setVersiones(versionesA);
+
         VersionProducto versionProductoB1 = new VersionProducto(
                 10, //id
                 "0.9.8", //numero version
@@ -81,24 +82,31 @@ public class TicketController {
                 "MVP terminado. Inicio de nueva feature"
         );
 
-        //List<Version> versionesB = new List<>(versionB1, versionB2);
-        //productoB.setVersiones(List.of(versionB1, versionB2)); //agrego versiones al producto
+        List<VersionProducto> versionesB = new ArrayList<>();
+        versionesB.add(versionProductoB1);
+        versionesB.add(versionProductoB2);
 
-       // return List.of(productoA, productoB, productoC);
-        return new ArrayList<Producto>();
-    }*/
+        productoB.setVersiones(versionesB);
 
-    /*@GetMapping(path = "url_server_soporte/ticket_table/{id_producto}, {id_version}")
-    public List<List<Ticket>> getTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
-                                                                   @PathVariable("id_version") Integer versionId) {
-       // List<Ticket> ticketsAbiertos = ticketService.getTicketsByEstadoByProductoAndVersion(new Abierto(), productoId, versionId);
-       // List<Ticket> ticketsCerrados = ticketService.getTicketsByEstadoByProductoAndVersion(new Cerrado(), productoId, versionId);
+        VersionProducto versionProductoC = new VersionProducto(
+                514, //id
+                "1.1.0.0", //numero version
+                productoC, //producto
+                "Comienzo de nueva feaure" //caracteristicas
+        );
+        List<VersionProducto> versionesC = new ArrayList<>();
+        versionesC.add(versionProductoC);
+        productoC.setVersiones(versionesC);
 
-       // return List.of(ticketsAbiertos, ticketsCerrados);
-        //return List.of(null, null);
-        ArrayList<Ticket> tickets = new ArrayList<>();
-        return new ArrayList<>();
-    }*/
+
+        List<Producto> productos = new ArrayList<>();
+        productos.add(productoA);
+        productos.add(productoB);
+        productos.add(productoC);
+
+        return productos;
+    }
+
 
     //  GETTERS del SISTEMA EXTERNO
     public Cliente[] getClientes() {
@@ -171,8 +179,6 @@ public class TicketController {
         HttpEntity<String> requestPost = new HttpEntity<String>(tareaJsonObject.toString(), headers);
 
         restTemplate.postForObject("url_api_proyectos", requestPost, String.class);
-
-
     }*/
 
 

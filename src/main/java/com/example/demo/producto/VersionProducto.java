@@ -1,20 +1,10 @@
 package com.example.demo.producto;
 
 public class VersionProducto {
-   // @Id
-   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String numero_version;
-
-    //@Column(name = "codigo_producto",length = 50)
-    //private Integer codigo_producto;
-
-    // @Column(name = "caracteristicas",length = 50)
     private String caracteristicas;
-
     private Producto producto;
-
     public VersionProducto(){
 
     }

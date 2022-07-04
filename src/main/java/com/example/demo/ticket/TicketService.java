@@ -18,32 +18,6 @@ public class TicketService {
     @Autowired
     private final TicketRepository ticketRepository;
 
-    //de Lau
-/*
-    @Override
-    public List<Ticket> getAllTickets(){
-        List<Ticket> tickets = new ArrayList<>();
-        ticketRepository.findAll().forEach(tickets::add);
-        return tickets;
-    }
-    @Override
-    public Optional<Ticket> getTicket(Integer id) {
-        return ticketRepository.findById(id);
-    }
-    @Override
-    public void addTicket(Ticket ticket){
-        ticketRepository.save(ticket);
-    }
-    @Override
-    public void updateTicket(Ticket ticket,Integer id){
-        ticketRepository.save(ticket);
-    }
-
-    @Override
-    public void delete(Integer id){
-        ticketRepository.deleteById(id);
-    }
-*/
     public TicketService(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
     }
@@ -53,7 +27,7 @@ public class TicketService {
     public List<TicketTable> getTicketsByVersion(Integer versionId) {
 
         if(versionId == null){
-            return ticketRepository.findAll();
+            return (List<TicketTable>) ticketRepository.findAll();
         }
 
         List<TicketTable> tickets = ticketRepository.findByVersion(versionId);
@@ -61,17 +35,6 @@ public class TicketService {
         return tickets;
 
     }
-
-    /*public List<TicketTable> getTicketsByEstadoByProductoAndVersion(EstadoTicket estado, Integer productoId, Integer versionId) {
-        return ticketRepository.findTicketsByEstadoByProductIdAndVersionId(estado.getestadoId(), productoId, versionId);
-    }*/
-
-
-    /*public Integer getCantidadTicketsByEstadoByProductoAndVersion(EstadoTicket estado, Integer productoId, Integer versionId) {
-        List<TicketTable> tickets = ticketRepository.findTicketsByEstadoByProductIdAndVersionId(estado.getestadoId(), productoId, versionId);
-
-        return tickets.size();
-    }*/
 
 
     //POSTS
@@ -87,8 +50,7 @@ public class TicketService {
 
 
     //PUTS
-    @Transactional //---- ACTUALIZAAAAR
-    //Transactional me permite no usar queries de bases de datos
+    @Transactional
     public void updateTicket(Integer ticketId, String CUIT, EstadoTicket estado, Integer severidad, DateFormat fechaVencimiento,DateFormat fechaInicial, String descripcion) {
         VersionProducto versionProducto = new VersionProducto();
         TicketTable ticketTable = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalStateException("ticket with id" + ticketId + "does not exist"));
@@ -121,14 +83,4 @@ public class TicketService {
         ticketRepository.save(ticketTable);
     }
 
-
-    //DELETES
-    public void deleteTicket(Integer ticketId) {
-        boolean exists = ticketRepository.existsById(ticketId);
-        if (!exists) {
-            throw new IllegalStateException("ticket with id " + ticketId + "does not exists");
-        }
-
-        ticketRepository.deleteById(ticketId);
-    }
 }

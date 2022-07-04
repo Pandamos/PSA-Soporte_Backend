@@ -9,15 +9,11 @@ import java.util.List;
 
 @Repository
 public interface TicketRepository extends CrudRepository<TicketTable,Integer> {
+    @Query(value = "SELECT * FROM ticket_table c WHERE c.version_id=:versionId",nativeQuery = true)
+    public List<TicketTable> findByVersion(@Param("versionId") Integer versionId);
 
 
-    @Query(value = "SELECT * FROM ticket_table c WHERE c.version_id=:version_id",nativeQuery = true)
-    public List<TicketTable> findByVersion(@Param("version_id") Integer versionId);
     //@Query("SELECT t FROM Ticket t WHERE t.id = ?1")
     //Optional<TicketTable> findTicketById(Integer id);
 
-    //List<TicketTable> findTicketsByProductIdAndVersionId(Integer productId, Integer versionId);
-
-    //pregunta: como estoy guardando el Estado del Ticket en mi DB?
-    //List<TicketTable> findTicketsByEstadoByProductIdAndVersionId(String estado, Integer productoId, Integer versionId);
 }
