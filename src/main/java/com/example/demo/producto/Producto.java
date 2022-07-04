@@ -5,9 +5,7 @@ import java.util.List;
 public class Producto {
     private Integer id;
     private String fase;
-
     private String nombre;
-
     private List<VersionProducto> versiones;
 
     public Producto(Integer id, String fase, String nombre) {
@@ -16,12 +14,12 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public Integer getCodigo() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer codigo) {
-        this.id = codigo;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFase() {
@@ -29,6 +27,14 @@ public class Producto {
     }
 
     public void setFase(String fase) {this.fase = fase;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public void setVersiones(List<VersionProducto> versiones) {
