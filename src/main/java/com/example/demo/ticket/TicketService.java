@@ -3,6 +3,8 @@ package com.example.demo.ticket;
 import com.example.demo.producto.VersionProducto;
 import com.example.demo.ticket.estado.EstadoTicket;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -44,7 +46,7 @@ public class TicketService {
 
     //PUTS
     @Transactional
-    public void updateTicket(Integer ticketId, String cuit, EstadoTicket estado, Integer severidad, DateFormat fechaVencimiento,DateFormat fechaInicial, String descripcion) {
+    public TicketTable updateTicket(Integer ticketId, String cuit, EstadoTicket estado, Integer severidad, DateFormat fechaVencimiento, DateFormat fechaInicial, String descripcion) {
         VersionProducto versionProducto = new VersionProducto();
         TicketTable ticketTable = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalStateException("ticket with id" + ticketId + "does not exist"));
         Ticket ticket = new Ticket(ticketTable,versionProducto);
@@ -73,7 +75,7 @@ public class TicketService {
             ticketTable.setFechaDeCreacion(fechaInicial);
         }
 
-        ticketRepository.save(ticketTable);
+        return ticketRepository.save(ticketTable);
     }
 
 }
