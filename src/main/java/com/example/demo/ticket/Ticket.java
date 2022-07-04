@@ -23,11 +23,12 @@ public class Ticket {
 
     private TicketTable ticketTable;
 
-    public Ticket(TicketTable ticketTable){
+    public Ticket(TicketTable ticketTable,VersionProducto version){
         this.version = version;
         this.ticketTable = ticketTable;
         this.estadoTicket = new Abierto();
     }
+
 
     public VersionProducto getVersion() {
         return this.version;
@@ -40,7 +41,9 @@ public class Ticket {
     //public void setearEstado(){
      //   ticketTable.setEstado(estadoTicket.getestadoId());
     //}
-
+    public void cambiarEstado(EstadoTicket estadoTicket){
+        ticketTable.setEstado(estadoTicket.getestadoId());
+    }
 
     //public void cerrarTicket(){
     //   estadoTicket = new Cerrado();

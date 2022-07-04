@@ -15,6 +15,10 @@ public class VersionProducto {
 
     private Producto producto;
 
+    public VersionProducto(){
+
+    }
+
     public VersionProducto(Integer id, String numero_version, Producto producto, String caracteristicas) {
         this.caracteristicas = caracteristicas;
         this.numero_version = numero_version;

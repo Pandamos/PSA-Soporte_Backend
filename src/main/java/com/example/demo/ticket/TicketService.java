@@ -1,5 +1,6 @@
 package com.example.demo.ticket;
 
+import com.example.demo.producto.VersionProducto;
 import com.example.demo.ticket.estado.EstadoTicket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import javax.transaction.Transactional;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -48,19 +50,20 @@ public class TicketService {
 
 
     //GETTERS
-    public Iterable<TicketTable> getTickets(Integer versionId) {
-        /*if (productoId != null && versionId != null) {
-            return ticketRepository.findTicketsByProductIdAndVersionId(productoId, versionId);
-        }*/
-        Iterable<TicketTable> tickets = ticketRepository.findByVersion(versionId);
-        /*List<Ticket> ticketList = new ArrayList<>();
+    public List<Ticket> getTickets(Integer versionId) {
+
+        VersionProducto versionProducto = new VersionProducto();
+        versionProducto.setCodigo_producto(versionId);
+        List<TicketTable> tickets = ticketRepository.findByVersion(versionId);
+        List<Ticket> ticketList = new ArrayList<>();
+
         for(int i = 0; i < tickets.size(); i++){
-            Ticket ticket = new Ticket(tickets.get(i));
+
+            Ticket ticket = new Ticket(tickets.get(i),versionProducto);
             ticketList.add(ticket);
         }
-        return ticketList; */
+        return ticketList;
 
-        return tickets;
     }
 
     /*public List<TicketTable> getTicketsByEstadoByProductoAndVersion(EstadoTicket estado, Integer productoId, Integer versionId) {
@@ -100,30 +103,36 @@ public class TicketService {
     //PUTS
     @Transactional //---- ACTUALIZAAAAR
     //Transactional me permite no usar queries de bases de datos
-    public void updateTicket(Integer ticketId, Integer responsableId, EstadoTicket estado, Integer severidad, DateFormat fechaVencimiento, Integer clienteId) {
-        TicketTable ticket = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalStateException("ticket with id" + ticketId + "does not exist"));
+    public void updateTicket(Integer ticketId, String CUIT, EstadoTicket estado, Integer severidad, DateFormat fechaVencimiento,DateFormat fechaInicial, String descripcion) {
+        VersionProducto versionProducto = new VersionProducto();
+        TicketTable ticketTable = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalStateException("ticket with id" + ticketId + "does not exist"));
+        Ticket ticket = new Ticket(ticketTable,versionProducto);
 
-        /*if (responsableId != null && !Objects.equals(ticket.getResponsableId(), responsableId)) {
-            ticket.setResponsableId(responsableId);
+        if (CUIT != null && !Objects.equals(ticketTable.getCUIT(), CUIT)) {
+            ticketTable.setCUIT(CUIT);
         }
 
-        if (estado != null && !Objects.equals(ticket.getEstado(), estado)) {
-            ticket.setEstado(estado);
+        if (estado != null && !Objects.equals(ticketTable.getEstado(), estado.getestadoId())) {
+            ticket.cambiarEstado(estado);
         }
 
-        if (severidad != null && !Objects.equals(ticket.getSeveridad(), severidad)) {
-            ticket.setSeveridad(severidad);
+        if (severidad != null && !Objects.equals(ticketTable.getSeveridad(), severidad)) {
+            ticketTable.setSeveridad(severidad);
         }
 
-        if (fechaVencimiento != null && !Objects.equals(ticket.getFechaVencimiento(), fechaVencimiento)) {
-            ticket.setFechaVencimiento(fechaVencimiento);
+        if (fechaVencimiento != null && !Objects.equals(ticketTable.getFechaDeFinalizacion(), fechaVencimiento)) {
+            ticketTable.setFechaDeFinalizacion(fechaVencimiento);
         }
 
-        if (clienteId != null && !Objects.equals(ticket.getClienteId(), clienteId)) {
-            ticket.setClienteId(clienteId);
-        }*/
+        if (descripcion != null && !Objects.equals(ticketTable.getDescripcion(), descripcion)) {
+            ticketTable.setDescripcion(descripcion);
+        }
 
-        ticketRepository.save(ticket);
+        if (fechaInicial != null && !Objects.equals(ticketTable.getFechaDeCreacion(), fechaInicial)) {
+            ticketTable.setFechaDeCreacion(fechaInicial);
+        }
+
+        ticketRepository.save(ticketTable);
     }
 
 

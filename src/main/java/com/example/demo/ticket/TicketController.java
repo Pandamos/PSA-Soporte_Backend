@@ -40,7 +40,7 @@ public class TicketController {
         return ticketService.getCantidadTickets(productoId, versionId);
     }
 
-    @GetMapping(path = "/ticket_table/{id_producto}, {id_version}")
+    /*@GetMapping(path = "/ticket_table/{id_producto}, {id_version}")
     public List<Integer> getCantidadTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
                                                              @PathVariable("id_version") Integer versionId) {
         //Integer cantAbiertos = ticketService.getCantidadTicketsByEstadoByProductoAndVersion(new Abierto(), productoId, versionId);
@@ -48,9 +48,9 @@ public class TicketController {
 
        //return List.of(cantAbiertos, cantCerrados);
         return new ArrayList<>();
-    }
+    }*/
 
-    @GetMapping //todos los productos, con sus versiones
+    /*@GetMapping //todos los productos, con sus versiones
     public List<Producto> getAllProductos(){
 
         //PRODUCTOS
@@ -92,9 +92,9 @@ public class TicketController {
 
        // return List.of(productoA, productoB, productoC);
         return new ArrayList<Producto>();
-    }
+    }*/
 
-    @GetMapping(path = "url_server_soporte/ticket_table/{id_producto}, {id_version}")
+    /*@GetMapping(path = "url_server_soporte/ticket_table/{id_producto}, {id_version}")
     public List<List<Ticket>> getTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
                                                                    @PathVariable("id_version") Integer versionId) {
        // List<Ticket> ticketsAbiertos = ticketService.getTicketsByEstadoByProductoAndVersion(new Abierto(), productoId, versionId);
@@ -104,7 +104,7 @@ public class TicketController {
         //return List.of(null, null);
         ArrayList<Ticket> tickets = new ArrayList<>();
         return new ArrayList<>();
-    }
+    }*/
 
     //  GETTERS del SISTEMA EXTERNO
     public Cliente[] getClientes() {
@@ -133,7 +133,7 @@ public class TicketController {
     }
 
     //  GETTERS de PROJECTOS
-    @GetMapping(path = "/ticket_table/{id_tarea}") //ayuda de fer -- revisar
+    /*@GetMapping(path = "/ticket_table/{id_tarea}") //ayuda de fer -- revisar
     public ArrayList<Tarea> getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + tareaId;
         RestTemplate restTemplate = new RestTemplate();
@@ -141,13 +141,14 @@ public class TicketController {
         Tarea[] tareas = response.getBody();
        // return new ArrayList<>(List.of(tareas));
         return new ArrayList<>();
-    }
+    }*/
 
     // POSTS
     @PostMapping
     //add new ticket to our system
     public void createTicket(@RequestBody TicketTable ticketTable){
-        Ticket ticket = new Ticket(ticketTable);
+        VersionProducto versionProducto = new VersionProducto();
+        Ticket ticket = new Ticket(ticketTable,versionProducto);
         ticket.abrirTicket();
         ticketService.createTicket(ticketTable);
     }
@@ -188,12 +189,13 @@ public class TicketController {
     //update Ticket in system
     public void updateTicket(
             @PathVariable("ticketId") Integer ticketId,
-            @RequestParam(required = false) Integer responsableId,
+            @RequestParam(required = false) String CUIT,
             @RequestParam(required = false) EstadoTicket Estado,
             @RequestParam(required = false) Integer severidad,
             @RequestParam(required = false) DateFormat fechaVencimiento,
-            @RequestParam(required = false) Integer clienteId) {
-        ticketService.updateTicket(ticketId, responsableId, Estado, severidad, fechaVencimiento, clienteId);
+            @RequestParam(required = false) DateFormat fechaInicial,
+            @RequestParam(required = false) String descripcion) {
+        ticketService.updateTicket(ticketId, CUIT, Estado, severidad, fechaVencimiento, fechaInicial, descripcion);
     }
 
 
