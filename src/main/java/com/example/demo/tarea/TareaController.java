@@ -17,7 +17,7 @@ import java.util.Arrays;
 @RequestMapping(path = "/proyectos")
 public class TareaController {
 
-    @GetMapping(path = "/ticket_table/{id_tarea}") //ayuda de fer -- revisar
+    @GetMapping(path = "/ticket_table/{id_tarea}")
     public TicketTable[] getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + tareaId;
         RestTemplate restTemplate = new RestTemplate();
@@ -29,7 +29,7 @@ public class TareaController {
     @GetMapping (path = "/tareas")
     public Tarea[] getTareas(@RequestParam (required = false) Integer ticketId) {
         //get todas las tareas
-        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/tareas";
+        final String uri = "https://moduloproyectos.herokuapp.com/tareas";
 
         RestTemplate restTemplate = new RestTemplate();
         Tarea[] tareas = restTemplate.getForEntity(uri, Tarea[].class).getBody();
@@ -51,10 +51,19 @@ public class TareaController {
         return tareas_filtradas;
     }
 
-    @PostMapping(path = "/tareas")
+    @GetMapping (path = "/proyectos")
+    public Proyecto[] getProyectos() {
+        final String uri = "https://moduloproyectos.herokuapp.com/proyectos";
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Proyecto[]> response = restTemplate.getForEntity(uri, Proyecto[].class);
+        Proyecto[] proyectos = response.getBody();
+        return proyectos;
+    }
+
+    @PostMapping(path = "/{id_ticket}/tareas")
     //add new tarea to our system
-    public String createTarea(@RequestBody Tarea tarea){
-        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + tarea.getId() + "/tareas";
+    public String createTarea(@PathParam("id_ticket") Integer ticketId, @RequestBody Tarea tarea){
+        final String uri = "https://moduloproyectos.herokuapp.com/" + tarea.getId() + "/tareas";
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -76,17 +85,22 @@ public class TareaController {
         return restTemplate.exchange(uri, HttpMethod.POST, headerRequestEntity, String.class).getBody();
     }
 
-    @PostMapping (path = "/{tareaId}")
+    @PostMapping (path = "/updateTarea/{id_proyecto}")
     //link tarea to ticket
-    public String updateTarea(@PathParam("tareaId") Integer tareaId, @RequestBody TicketTable ticketTable) {
+    public String updateTarea(@PathParam("id_proyecto") Integer idProyecto, @RequestBody Tarea tarea, @RequestBody TicketTable ticketTable) {
         //mandamos el ticket a los de proyectos
-        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/tareas/" + tareaId + "/tickets/" + ticketTable.getId();
+        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas" + tarea.getId();
 
         RestTemplate restTemplate = new RestTemplate();
+        String respuesta = restTemplate.exchange(uri, HttpMethod.POST, null, String.class).getBody();
 
-        HttpHeaders headers = new HttpHeaders();
-        //pasar los dos ids como parámetros -- ya están en la url
-        return restTemplate.exchange(uri, HttpMethod.POST, null, String.class).getBody();
+        //linkeamos el ticket con la tarea
+        final String uri_addTicket = "https://moduloproyectos.herokuapp.com/tareas/" + tarea.getId() + "/tickets/" + ticketTable.getId();
+
+        restTemplate = new RestTemplate();
+        restTemplate.exchange(uri_addTicket, HttpMethod.POST, null, void.class);
+
+        return respuesta;
     }
 
 }
