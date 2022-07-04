@@ -17,7 +17,7 @@ import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
-@RequestMapping(path = "/ticket/")
+@RequestMapping(path = "/ticket")
 public class TicketController {
     @Autowired
     private final TicketService ticketService;
@@ -37,7 +37,7 @@ public class TicketController {
 
 
     @GetMapping(path = "/productos") //todos los productos, con sus versiones
-    public List<VersionProducto> getProductos(){
+    public List<Producto> getProductos(){
 
         //PRODUCTOS
         Producto productoA = new Producto(
@@ -65,9 +65,7 @@ public class TicketController {
                 productoA, //producto
                 "Pre-Alpha" //caracteristicas
         );
-        List<VersionProducto> versionesA = new ArrayList<>();
-        versionesA.add(versionProductoA);
-        productoA.setVersiones(versionesA);
+        productoB.setVersion(versionProductoA);
 
         VersionProducto versionProductoB1 = new VersionProducto(
                 10, //id
@@ -82,12 +80,8 @@ public class TicketController {
                 productoB,
                 "MVP terminado. Inicio de nueva feature"
         );
-
-        List<VersionProducto> versionesB = new ArrayList<>();
-        versionesB.add(versionProductoB1);
-        versionesB.add(versionProductoB2);
-
-        productoB.setVersiones(versionesB);
+        productoB.setVersion(versionProductoB1);
+        productoB.setVersion(versionProductoB2);
 
         VersionProducto versionProductoC = new VersionProducto(
                 514, //id
@@ -95,9 +89,7 @@ public class TicketController {
                 productoC, //producto
                 "Comienzo de nueva feaure" //caracteristicas
         );
-        List<VersionProducto> versionesC = new ArrayList<>();
-        versionesC.add(versionProductoC);
-        productoC.setVersiones(versionesC);
+        productoC.setVersion(versionProductoC);
 
 
         List<Producto> productos = new ArrayList<>();
@@ -105,7 +97,7 @@ public class TicketController {
         productos.add(productoB);
         productos.add(productoC);
 
-        return versionesB;
+        return productos;
     }
 
 

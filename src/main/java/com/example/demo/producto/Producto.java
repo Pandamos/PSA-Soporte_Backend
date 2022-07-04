@@ -44,8 +44,8 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public void setVersiones(List<VersionProducto> versiones) {
-        this.versiones = versiones;
+    public void setVersion(VersionProducto version) {
+        this.versiones.add(version);
     }
 
 }
