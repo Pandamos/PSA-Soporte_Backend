@@ -104,11 +104,11 @@ public class TareaController {
 
     @PostMapping (path = "/updateTarea/{id_proyecto}/{id_ticket}") //
     //link tarea to ticket
-    public String updateTarea(@PathVariable("id_proyecto") Integer idProyecto,
-                              @RequestBody Tarea tarea,
+    public String updateTarea(@RequestBody Tarea tarea,
+                              @PathVariable("id_proyecto") Integer idProyecto,
                               @PathVariable("id_ticket") Integer idTicket) {
         //mandamos el ticket a los de proyectos
-        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas" + tarea.getId();
+        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + tarea.getId();
 
         RestTemplate restTemplate = new RestTemplate();
         String respuesta = restTemplate.exchange(uri, HttpMethod.POST, null, String.class).getBody();
