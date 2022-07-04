@@ -6,19 +6,9 @@ import com.example.demo.producto.Producto;
 import com.example.demo.producto.VersionProducto;
 import com.example.demo.tarea.Tarea;
 import com.example.demo.ticket.estado.EstadoTicket;
-import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.endpoint.web.CorsEndpointProperties;
-import org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties;
-import org.springframework.boot.actuate.autoconfigure.web.server.ManagementPortType;
-import org.springframework.boot.actuate.endpoint.ExposableEndpoint;
-import org.springframework.boot.actuate.endpoint.web.*;
-import org.springframework.boot.actuate.endpoint.web.annotation.ControllerEndpointsSupplier;
-import org.springframework.boot.actuate.endpoint.web.annotation.ServletEndpointsSupplier;
-import org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping;
-import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,7 +16,7 @@ import java.text.DateFormat;
 import java.util.*;
 
 @RestController
-@RequestMapping(path = "/psa_back_soporte")
+@RequestMapping(path = "psa_back_soporte")
 public class TicketController {
     @Autowired
     private final TicketService ticketService;
@@ -111,7 +101,6 @@ public class TicketController {
     }*/
 
     //  GETTERS del SISTEMA EXTERNO
-    @GetMapping(path = "/clientes")
     public Cliente[] getClientes() {
         final String uri = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/clientes-psa/1.0.0/m/api/clientes";
         RestTemplate restTemplate = new RestTemplate();
@@ -129,7 +118,7 @@ public class TicketController {
         return empleados;
     }
 
-    @GetMapping(path = "/empleado/{empleadoId}")
+    @GetMapping(path = "/empleado")
     public Empleado getEmpleadoById(@PathVariable("empleadoId") int empleadoId) {
         final String uri = "https://squad5-recursos.herokuapp.com/api/empleados/{empleadoId}";
         RestTemplate restTemplate = new RestTemplate();
@@ -149,7 +138,7 @@ public class TicketController {
     }*/
 
     // POSTS
-    @PostMapping(path = "/ticket")
+    @PostMapping
     //add new ticket to our system
     public void createTicket(@RequestBody TicketTable ticketTable){
         VersionProducto versionProducto = new VersionProducto();
@@ -187,10 +176,8 @@ public class TicketController {
     }*/
 
 
-
-
     //PUTS y PATCHS
-    @PutMapping(path = "/ticket/{ticketId}")
+    @PutMapping
     //update Ticket in system
     public void updateTicket(
             @PathVariable("ticketId") Integer ticketId,

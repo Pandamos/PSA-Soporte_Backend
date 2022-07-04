@@ -50,18 +50,15 @@ public class TicketService {
 
 
     //GETTERS
-    public List<Ticket> getTickets(Integer versionId) {
+    public List<TicketTable> getTicketsByVersion(Integer versionId) {
 
-        VersionProducto versionProducto = new VersionProducto();
-        versionProducto.setCodigo_producto(versionId);
-        List<TicketTable> tickets = ticketRepository.findByVersion(versionId);
-        List<Ticket> ticketList = new ArrayList<>();
-
-        for(int i = 0; i < tickets.size(); i++){
-            Ticket ticket = new Ticket(tickets.get(i),versionProducto);
-            ticketList.add(ticket);
+        if(versionId == null){
+            return ticketRepository.findAll();
         }
-        return ticketList;
+
+        List<TicketTable> tickets = ticketRepository.findByVersion(versionId);
+
+        return tickets;
 
     }
 
