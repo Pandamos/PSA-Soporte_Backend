@@ -1,6 +1,7 @@
 package com.example.demo.tarea;
 
 import com.example.demo.empleado.Empleado;
+import com.example.demo.ticket.Ticket;
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,11 +16,11 @@ import java.util.ArrayList;
 public class TareaController {
 
     @GetMapping(path = "/ticket_table/{id_tarea}") //ayuda de fer -- revisar
-    public ArrayList<Tarea> getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
+    public ArrayList<Ticket> getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + tareaId;
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Tarea[]> response = restTemplate.getForEntity(uri, Tarea[].class);
-        Tarea[] tareas = response.getBody();
+        ResponseEntity<Ticket[]> response = restTemplate.getForEntity(uri, Ticket[].class);
+        Ticket[] tickets = response.getBody();
         return new ArrayList<>();
     }
 
