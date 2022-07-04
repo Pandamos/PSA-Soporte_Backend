@@ -18,7 +18,7 @@ public class EmpleadoController {
         return empleados;
     }
 
-    @GetMapping(path = "/empleadoById")
+    @GetMapping(path = "/empleadoById/{empleadoId}")
     public Empleado getEmpleadoById(@PathVariable("empleadoId") int empleadoId) {
         final String uri = "https://squad5-recursos.herokuapp.com/api/empleados/{empleadoId}";
         RestTemplate restTemplate = new RestTemplate();

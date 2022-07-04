@@ -23,7 +23,7 @@ public class TareaController {
         return new ArrayList<>();
     }
 
-    @PostMapping
+    @PostMapping(path = "???")
     //add new tarea to our system
     public void createTarea(@RequestBody Tarea tarea){
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + tarea.getId() + "/tareas";
