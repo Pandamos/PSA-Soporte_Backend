@@ -100,6 +100,7 @@ public class TicketController {
     }*/
 
     //  GETTERS del SISTEMA EXTERNO
+    @GetMapping(path = "/clientes")
     public Cliente[] getClientes() {
         final String uri = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/clientes-psa/1.0.0/m/api/clientes";
         RestTemplate restTemplate = new RestTemplate();
@@ -117,7 +118,7 @@ public class TicketController {
         return empleados;
     }
 
-    @GetMapping(path = "/empleado")
+    @GetMapping(path = "/empleado/{empleadoId}")
     public Empleado getEmpleadoById(@PathVariable("empleadoId") int empleadoId) {
         final String uri = "https://squad5-recursos.herokuapp.com/api/empleados/{empleadoId}";
         RestTemplate restTemplate = new RestTemplate();
@@ -137,7 +138,7 @@ public class TicketController {
     }*/
 
     // POSTS
-    @PostMapping
+    @PostMapping(path = "/ticket")
     //add new ticket to our system
     public void createTicket(@RequestBody TicketTable ticketTable){
         VersionProducto versionProducto = new VersionProducto();
@@ -178,7 +179,7 @@ public class TicketController {
 
 
     //PUTS y PATCHS
-    @PutMapping
+    @PutMapping(path = "/ticket/{ticketId}")
     //update Ticket in system
     public void updateTicket(
             @PathVariable("ticketId") Integer ticketId,
@@ -191,10 +192,4 @@ public class TicketController {
         ticketService.updateTicket(ticketId, CUIT, Estado, severidad, fechaVencimiento, fechaInicial, descripcion);
     }
 
-
-    //DELETES
-    @DeleteMapping(path = "{ticketId}")
-    public void deleteTicket(@PathVariable("ticketId") Integer ticketId){
-        ticketService.deleteTicket(ticketId);
-    }
 }
