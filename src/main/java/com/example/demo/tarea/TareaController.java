@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.websocket.server.PathParam;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -116,16 +115,28 @@ public class TareaController {
 
         //mandamos la actualización de la tarea a los de proyectos
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + tarea.getId();
-        tarea.setIdTicket(idTicket);
+       // tarea.setIdTicket(idTicket);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+       // headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        // set `content-type` header
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        // set `accept` header
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+
+        Map<String, Object> tarea_map = new HashMap<>();
+        tarea_map.put("descripcion", tarea.getDescripcion());
+        tarea_map.put("estado", tarea.getEstado());
+        tarea_map.put("id", tarea.getId());
+        tarea_map.put("idProyecto",idProyecto);
+        tarea_map.put("idTicket", idTicket);
+        tarea_map.put("nombre", tarea.getNombre());
+        tarea_map.put("fechaCreacion", tarea.getFechaCreacion());
 
         HttpEntity<Tarea> headerRequestEntity = new HttpEntity<Tarea>(tarea, headers);
         RestTemplate restTemplate = new RestTemplate();
-        String respuesta = restTemplate.exchange(uri, HttpMethod.POST, headerRequestEntity, String.class).getBody();
+        return restTemplate.postForEntity(uri, headerRequestEntity, String.class).getBody();
 
-
-        return respuesta;
     }
 }
