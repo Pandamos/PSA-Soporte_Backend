@@ -1,11 +1,16 @@
 package com.example.demo.producto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Producto {
+    @JsonProperty("id")
     private Integer id;
+    @JsonProperty("fase")
     private String fase;
+    @JsonProperty("nombre")
     private String nombre;
     private List<VersionProducto> versiones;
 

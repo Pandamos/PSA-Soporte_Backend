@@ -1,9 +1,15 @@
 package com.example.demo.producto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class VersionProducto {
+    @JsonProperty("id")
     private Integer id;
+    @JsonProperty("numero_version")
     private String numero_version;
+    @JsonProperty("caracteristicas")
     private String caracteristicas;
+    @JsonProperty("producto")
     private Producto producto;
     public VersionProducto(){}
 
