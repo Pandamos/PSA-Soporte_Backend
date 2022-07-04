@@ -36,10 +36,14 @@ public class TicketTable implements Serializable {
     @Column(name = "version_id",length = 50)
     private Integer versionId;
 
+    @Column(name = "legajo_responsable",length = 50)
+    private Integer legajoResponsable;
+
+
     public TicketTable() {
     }
 
-    public TicketTable(Integer id, String descripcion, Integer severidad,Integer fechaDeCreacion,Integer fechaDeFinalizacion,String CUIT,String estado,Integer versionId, String titulo){
+    public TicketTable(Integer id, String descripcion, Integer severidad,Integer fechaDeCreacion,Integer fechaDeFinalizacion,String CUIT,String estado,Integer versionId, String titulo, Integer legajoResponsable){
         super();
         this.id = id;
         this.descripcion = descripcion;
@@ -50,6 +54,7 @@ public class TicketTable implements Serializable {
         this.cuit = CUIT;
         this.versionId = versionId;
         this.titulo = titulo;
+        this.legajoResponsable = legajoResponsable;
     }
 
     public String getEstado() {
@@ -59,8 +64,6 @@ public class TicketTable implements Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
-
 
     public Integer getId() {
         return id;
@@ -120,5 +123,21 @@ public class TicketTable implements Serializable {
 
     public void cambiarEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public Integer getLegajoResponsable() {
+        return legajoResponsable;
+    }
+
+    public void setLegajoResponsable(Integer legajoResponsable) {
+        this.legajoResponsable = legajoResponsable;
     }
 }

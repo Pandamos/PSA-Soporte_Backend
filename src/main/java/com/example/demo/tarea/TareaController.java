@@ -20,6 +20,9 @@ public class TareaController {
 
     @Autowired
     RestTemplate restTemplate;
+
+    @Autowired
+    TicketService ticketService;
     //private final TicketService ticketService;
 
     /*public TareaController() {
@@ -36,20 +39,28 @@ public class TareaController {
     }
 
     @GetMapping (path = "/tareas")
-    public Tarea[] getTareas(@RequestParam (required = false) Integer ticketId, TicketTable ticketTable) {
+    public Tarea[] getTareas(@RequestParam (required = false) Integer ticketId) {
+        //get todas las tareas
+        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/tareas";
 
-        //get all ticket
+        RestTemplate restTemplate = new RestTemplate();
+        Tarea[] tareas = restTemplate.getForEntity(uri, Tarea[].class).getBody();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        HttpEntity <String> entity = new HttpEntity<String>(headers);
+        if (ticketId == null)
+            return tareas;
 
-        restTemplate.exchange("http://localhost:8080/products", HttpMethod.GET, entity, String.class).getBody();
+        //get tareas con ticketId
+        Integer tareas_len = tareas.length;
+        Tarea[] tareas_filtradas = new Tarea[tareas_len];
+        int j = 0;
+        for (int i = 0; i < tareas_len; i++) {
+            if (tareas[i].getIdTicket().equals(ticketId)) {
+                tareas_filtradas[j] = tareas[i];
+                j++;
+            }
+        }
 
-
-        //TicketService ticketService = new TicketService(new TicketRepository());
-        return null;
-
+        return tareas_filtradas;
     }
 
     @PostMapping(path = "/tarea")
