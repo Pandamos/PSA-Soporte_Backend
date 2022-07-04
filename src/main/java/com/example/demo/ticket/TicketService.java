@@ -58,7 +58,6 @@ public class TicketService {
         List<Ticket> ticketList = new ArrayList<>();
 
         for(int i = 0; i < tickets.size(); i++){
-
             Ticket ticket = new Ticket(tickets.get(i),versionProducto);
             ticketList.add(ticket);
         }
@@ -70,16 +69,6 @@ public class TicketService {
         return ticketRepository.findTicketsByEstadoByProductIdAndVersionId(estado.getestadoId(), productoId, versionId);
     }*/
 
-    public Integer getCantidadTickets(Integer productoId, Integer versionId) {
-        List<TicketTable> tickets;
-        /*if (productoId != null && versionId != null) {
-            tickets = ticketRepository.findTicketsByProductIdAndVersionId(productoId, versionId);
-        } else {*/
-        //tickets = ticketRepository.findAll();
-       //}
-        return 0;
-
-    }
 
     /*public Integer getCantidadTicketsByEstadoByProductoAndVersion(EstadoTicket estado, Integer productoId, Integer versionId) {
         List<TicketTable> tickets = ticketRepository.findTicketsByEstadoByProductIdAndVersionId(estado.getestadoId(), productoId, versionId);

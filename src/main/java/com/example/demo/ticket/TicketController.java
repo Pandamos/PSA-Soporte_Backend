@@ -33,12 +33,6 @@ public class TicketController {
         return ticketService.getTickets(versionId);
     }
 
-    @GetMapping(path = "/cantidadTickets/{id_producto}-{id_version}")
-    public Integer getCantidadTickets(@PathVariable("id_producto") @RequestParam(required = false) Integer productoId,
-                                      @PathVariable("id_version") @RequestParam(required = false) Integer versionId){
-
-        return ticketService.getCantidadTickets(productoId, versionId);
-    }
 
     /*@GetMapping(path = "/ticket_table/{id_producto}, {id_version}")
     public List<Integer> getCantidadTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
