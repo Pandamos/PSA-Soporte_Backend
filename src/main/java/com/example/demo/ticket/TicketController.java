@@ -100,7 +100,6 @@ public class TicketController {
     public ResponseEntity<TicketTable> createTicket(@RequestBody TicketTable ticketTable){
         VersionProducto versionProducto = new VersionProducto();
         Ticket ticket = new Ticket(ticketTable,versionProducto);
-        ticket.abrirTicket();
         TicketTable ticketTableResultado = ticketService.createTicket(ticketTable);
         return new ResponseEntity<>(ticketTableResultado,HttpStatus.CREATED);
     }
