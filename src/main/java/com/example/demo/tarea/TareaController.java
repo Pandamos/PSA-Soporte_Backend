@@ -129,8 +129,8 @@ public class TareaController {
         tarea_map.put("descripcion", tarea.getDescripcion());
         tarea_map.put("estado", tarea.getEstado());
         tarea_map.put("id", tarea.getId());
-        tarea_map.put("idProyecto",idProyecto);
-        tarea_map.put("idTicket", idTicket);
+        //tarea_map.put("idProyecto",idProyecto);
+        //tarea_map.put("idTicket", idTicket);
         tarea_map.put("nombre", tarea.getNombre());
         tarea_map.put("fechaCreacion", tarea.getFechaCreacion());
 
