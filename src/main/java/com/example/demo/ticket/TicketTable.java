@@ -15,20 +15,23 @@ public class TicketTable implements Serializable {
     @Column(name = "CUIT_cliente",length = 50)
     private String cuit;
 
+    @Column(name = "estado",length = 50)
+    private String estado;
+
+    @Column(name = "titulo",length = 100)
+    private String titulo;
+    @Column(name = "descripcion",length = 250)
+    private String descripcion;
     @Column(name = "fecha_creacion",length = 50)
     private Integer fechaDeCreacion;
 
     @Column(name = "fecha_finalizacion",length = 50)
     private Integer fechaDeFinalizacion;
 
-    @Column(name = "descripcion",length = 50)
-    private String descripcion;
 
     @Column(name = "severidad",length = 50)
     private Integer severidad;
 
-    @Column(name = "estado",length = 50)
-    private String estado;
 
     @Column(name = "version_id",length = 50)
     private Integer versionId;
@@ -36,7 +39,7 @@ public class TicketTable implements Serializable {
     public TicketTable() {
     }
 
-    public TicketTable(Integer id, String descripcion, Integer severidad,Integer fechaDeCreacion,Integer fechaDeFinalizacion,String CUIT,String estado,Integer versionId){
+    public TicketTable(Integer id, String descripcion, Integer severidad,Integer fechaDeCreacion,Integer fechaDeFinalizacion,String CUIT,String estado,Integer versionId, String titulo){
         super();
         this.id = id;
         this.descripcion = descripcion;
@@ -46,6 +49,7 @@ public class TicketTable implements Serializable {
         this.fechaDeFinalizacion = fechaDeFinalizacion;
         this.cuit = CUIT;
         this.versionId = versionId;
+        this.titulo = titulo;
     }
 
     public String getEstado() {
