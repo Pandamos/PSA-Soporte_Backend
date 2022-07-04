@@ -56,7 +56,7 @@ public class TicketService {
         }
 
         if (estado != null && !Objects.equals(ticketTable.getEstado(), estado)) {
-            ticket.cambiarEstado(estado);
+            ticketTable.cambiarEstado(estado);
         }
 
         if (severidad != null && !Objects.equals(ticketTable.getSeveridad(), severidad)) {

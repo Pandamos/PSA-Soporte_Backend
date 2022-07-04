@@ -113,4 +113,8 @@ public class TicketTable implements Serializable {
     public void setVersionId(Integer versionId) {
         this.versionId = versionId;
     }
+
+    public void cambiarEstado(String estado) {
+        this.estado = estado;
+    }
 }
