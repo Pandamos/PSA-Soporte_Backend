@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 @CrossOrigin(origins = "", allowedHeaders = "", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
 @RestController
-@RequestMapping(path = "/proyecto")
+@RequestMapping(path = "/proyectos")
 public class TareaController {
 
     @GetMapping(path = "/ticket_table/{id_tarea}") //ayuda de fer -- revisar
@@ -51,7 +51,7 @@ public class TareaController {
         return tareas_filtradas;
     }
 
-    @PostMapping(path = "/tarea")
+    @PostMapping(path = "/tareas")
     //add new tarea to our system
     public String createTarea(@RequestBody Tarea tarea){
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/{" + tarea.getId() + "}/tareas";
