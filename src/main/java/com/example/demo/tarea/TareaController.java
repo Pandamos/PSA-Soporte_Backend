@@ -136,7 +136,6 @@ public class TareaController {
 
         HttpEntity<Tarea> headerRequestEntity = new HttpEntity<Tarea>(tarea, headers);
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForEntity(uri, headerRequestEntity, String.class).getBody();
-
+        return restTemplate.exchange(uri,HttpMethod.POST, headerRequestEntity, String.class).getBody();
     }
 }
