@@ -7,10 +7,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class TicketService {
@@ -39,13 +37,8 @@ public class TicketService {
 
     //POSTS
 
-    public void createTicket(TicketTable ticket) {
-        Optional<TicketTable> ticketOptional = ticketRepository.findById(ticket.getId());
-        if (ticketOptional.isPresent()) {
-            throw new IllegalStateException("id tomado. Elija otro.");
-        }
-
-        ticketRepository.save(ticket);
+    public TicketTable createTicket(TicketTable ticket) {
+        return ticketRepository.save(ticket);
     }
 
 

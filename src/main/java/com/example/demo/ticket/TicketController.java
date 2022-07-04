@@ -13,7 +13,7 @@ import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
-@RequestMapping(path = "soporte")
+@RequestMapping(path = "/soporte")
 public class TicketController {
     @Autowired
     private final TicketService ticketService;
@@ -101,8 +101,8 @@ public class TicketController {
         VersionProducto versionProducto = new VersionProducto();
         Ticket ticket = new Ticket(ticketTable,versionProducto);
         ticket.abrirTicket();
-        ticketService.createTicket(ticketTable);
-        return new ResponseEntity<>(ticketTable,HttpStatus.CREATED);
+        TicketTable ticketTableResultado = ticketService.createTicket(ticketTable);
+        return new ResponseEntity<>(ticketTableResultado,HttpStatus.CREATED);
     }
 
     //PUTS y PATCHS

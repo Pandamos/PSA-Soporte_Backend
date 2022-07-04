@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-@RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
-@RequestMapping(path = "/proyecto")
 @RestController
-@RequestMapping(path = "tareas")
+@RequestMapping(path = {"/proyecto", "tareas"})
 public class TareaController {
 
     @GetMapping(path = "/ticket_table/{id_tarea}") //ayuda de fer -- revisar
@@ -34,7 +32,6 @@ public class TareaController {
         ResponseEntity<Empleado[]> response = restTemplate.getForEntity(uri, Empleado[].class);
         Empleado[] empleados = response.getBody();
 
-        tarea = new Tarea();
         HttpHeaders headers = new HttpHeaders();
         JSONObject tareaJsonObject = new JSONObject();
 
