@@ -107,7 +107,7 @@ public class TareaController {
     public String updateTarea(@RequestBody Tarea tarea,
                               @PathVariable("id_proyecto") Integer idProyecto,
                               @PathVariable("id_ticket") Integer idTicket) {
-        //mandamos el ticket a los de proyectos
+        //mandamos la actualización de la tarea a los de proyectos
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + tarea.getId();
 
         RestTemplate restTemplate = new RestTemplate();
