@@ -105,6 +105,8 @@ public class TicketController {
         productos.add(productoB);
         productos.add(productoC);
 
+        System.out.println(productos);
+
         return productos;
     }
 
