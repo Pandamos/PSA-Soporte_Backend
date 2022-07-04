@@ -103,12 +103,12 @@ public class TareaController {
 
     @PostMapping (path = "/updateTarea/{id_proyecto}/{id_ticket}") //
     //link tarea to ticket
-    public String updateTarea(@RequestBody Tarea tarea,
+    public void updateTarea(@RequestBody Tarea tarea,
                               @PathVariable("id_proyecto") Integer idProyecto,
                               @PathVariable("id_ticket") Integer idTicket) {
 
         //mandamos la actualización de la tarea a los de proyectos
-        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + tarea.getId();
+       /* final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + tarea.getId();
         // tarea.setIdTicket(idTicket);
 
         HttpHeaders headers = new HttpHeaders();
@@ -131,15 +131,12 @@ public class TareaController {
         HttpEntity<Tarea> headerRequestEntity = new HttpEntity<Tarea>(tarea, headers);
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.exchange(uri,HttpMethod.POST, headerRequestEntity, String.class).getBody();
-
+*/
         //linkeamos el ticket con la tarea
         final String uri_addTicket = "https://moduloproyectos.herokuapp.com/tareas/" + tarea.getId() + "/tickets/" + idTicket;
 
-         restTemplate = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
         restTemplate.exchange(uri_addTicket, HttpMethod.POST, null, void.class);
 
-
-
-        return result;
     }
 }
