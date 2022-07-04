@@ -58,7 +58,7 @@ public class TicketController {
         VersionProducto versionProductoA = new VersionProducto(
                 3, //id
                 "0.2.4", //numero version
-                productoA, //producto
+                productoA.getId(), //producto
                 "Pre-Alpha" //caracteristicas
         );
         productoA.setVersion(versionProductoA);
@@ -66,7 +66,7 @@ public class TicketController {
         VersionProducto versionProductoB1 = new VersionProducto(
                 10, //id
                 "0.9.8", //numero version
-                productoB, //producto
+                productoB.getId(), //producto
                 "Casi listo para el release. Necesita testing en el bug encontrado por el usuario" //caracteristicas
         );
         productoB.setVersion(versionProductoB1);
@@ -74,7 +74,7 @@ public class TicketController {
         VersionProducto versionProductoB2 = new VersionProducto(
                 145,
                 "1.0.2",
-                productoB,
+                productoB.getId(),
                 "MVP terminado. Inicio de nueva feature"
         );
         productoB.setVersion(versionProductoB2);
@@ -82,7 +82,7 @@ public class TicketController {
         VersionProducto versionProductoC = new VersionProducto(
                 514, //id
                 "1.1.0.0", //numero version
-                productoC, //producto
+                productoC.getId(), //producto
                 "Comienzo de nueva feature" //caracteristicas
         );
         productoC.setVersion(versionProductoC);

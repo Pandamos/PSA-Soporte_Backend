@@ -10,13 +10,13 @@ public class VersionProducto {
     @JsonProperty("caracteristicas")
     private String caracteristicas;
     @JsonProperty("producto")
-    private Producto producto;
+    private Integer productoId;
     public VersionProducto(){}
 
-    public VersionProducto(Integer id, String numero_version, Producto producto, String caracteristicas) {
+    public VersionProducto(Integer id, String numero_version, Integer productoID, String caracteristicas) {
         this.caracteristicas = caracteristicas;
         this.numero_version = numero_version;
-        this.producto = producto;
+        this.productoId = productoID;
         this.id = id;
     }
 
