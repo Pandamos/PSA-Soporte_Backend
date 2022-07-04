@@ -47,7 +47,7 @@ public class TicketController {
         //Integer cantCerrados = ticketService.getCantidadTicketsByEstadoByProductoAndVersion(new Cerrado(), productoId, versionId);
 
        //return List.of(cantAbiertos, cantCerrados);
-        return List.of(1, 2);
+        return null;
     }
 
     @GetMapping //todos los productos, con sus versiones
@@ -90,7 +90,8 @@ public class TicketController {
         //List<Version> versionesB = new List<>(versionB1, versionB2);
         //productoB.setVersiones(List.of(versionB1, versionB2)); //agrego versiones al producto
 
-        return List.of(productoA, productoB, productoC);
+       // return List.of(productoA, productoB, productoC);
+        return null;
     }
 
     @GetMapping(path = "url_server_soporte/ticket_table/{id_producto}, {id_version}")
@@ -100,7 +101,8 @@ public class TicketController {
        // List<Ticket> ticketsCerrados = ticketService.getTicketsByEstadoByProductoAndVersion(new Cerrado(), productoId, versionId);
 
        // return List.of(ticketsAbiertos, ticketsCerrados);
-        return List.of(null, null);
+        //return List.of(null, null);
+        return null;
     }
 
     //  GETTERS del SISTEMA EXTERNO
@@ -136,7 +138,8 @@ public class TicketController {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Tarea[]> response = restTemplate.getForEntity(uri, Tarea[].class);
         Tarea[] tareas = response.getBody();
-        return new ArrayList<>(List.of(tareas));
+       // return new ArrayList<>(List.of(tareas));
+        return null;
     }
 
     // POSTS
