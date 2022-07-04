@@ -12,16 +12,17 @@ import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
+@CrossOrigin(origins = "", allowedHeaders = "", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
 @RestController
 @RequestMapping(path = "/proyecto")
 
 public class TareaController {
 
-   /* @Autowired
-    private final TicketService ticketService;
+    @Autowired
+    RestTemplate restTemplate;
+    //private final TicketService ticketService;
 
-    public TareaController() {
+    /*public TareaController() {
         this.ticketService = ticketService;
     }*/
 
@@ -29,7 +30,6 @@ public class TareaController {
     @GetMapping(path = "/ticket_table/{id_tarea}") //ayuda de fer -- revisar
     public TicketTable[] getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + tareaId;
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<TicketTable[]> response = restTemplate.getForEntity(uri, TicketTable[].class);
         TicketTable[] tickets = response.getBody();
         return tickets;
@@ -39,6 +39,12 @@ public class TareaController {
     public Tarea[] getTareas(@RequestParam (required = false) Integer ticketId, TicketTable ticketTable) {
 
         //get all ticket
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity <String> entity = new HttpEntity<String>(headers);
+
+        restTemplate.exchange("http://localhost:8080/products", HttpMethod.GET, entity, String.class).getBody();
 
 
         //TicketService ticketService = new TicketService(new TicketRepository());
