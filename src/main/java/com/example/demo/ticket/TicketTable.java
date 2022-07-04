@@ -14,13 +14,10 @@ public class TicketTable implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @Column(name = "CUIT_cliente",length = 50)
     private String cuit;
-
     @Column(name = "estado",length = 50)
     private String estado;
-
     @Column(name = "titulo",length = 100)
     private String titulo;
     @Column(name = "descripcion",length = 250)
@@ -28,19 +25,13 @@ public class TicketTable implements Serializable {
     @Column(name = "fecha_creacion",length = 50)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate fechaDeCreacion;
-
     @Column(name = "fecha_finalizacion",length = 50)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate fechaDeFinalizacion;
-
-
     @Column(name = "severidad",length = 50)
     private Integer severidad;
-
-
     @Column(name = "version_id",length = 50)
     private Integer versionId;
-
     @Column(name = "legajo_responsable",length = 50)
     private Integer legajoResponsable;
 

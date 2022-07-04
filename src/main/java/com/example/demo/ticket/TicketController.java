@@ -29,7 +29,8 @@ public class TicketController {
         return new ResponseEntity<>(tickets, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/productos") //todos los productos, con sus versiones
+    @GetMapping(path = "/productos") //funciona
+    //todos los productos, con sus versiones
     public List<Producto> getProductos(){
 
         //PRODUCTOS
@@ -94,7 +95,7 @@ public class TicketController {
     }
 
     // POSTS
-    @PostMapping(path = "/ticket")
+    @PostMapping(path = "/ticket") //funciona
     //add new ticket to our system
     public ResponseEntity<TicketTable> createTicket(@RequestBody TicketTable ticketTable){
         VersionProducto versionProducto = new VersionProducto();
@@ -104,13 +105,13 @@ public class TicketController {
     }
 
     //PUTS y PATCHS
-    @PutMapping(path = "/ticket/{ticketId}")
+    @PutMapping(path = "/ticket/{ticketId}") //funciona
     //update Ticket in systemD
     public ResponseEntity<TicketTable>  updateTicket(   @PathVariable("ticketId") Integer ticketId,
                                                         @RequestParam(required = false) String cuit,
                                                         @RequestParam(required = false) String estado,
                                                         @RequestParam(required = false) Integer severidad,
-                                                        @RequestParam(required = false) LocalDate  fechaVencimiento,
+                                                        @RequestParam(required = false) LocalDate fechaVencimiento,
                                                         @RequestParam(required = false) LocalDate fechaInicial,
                                                         @RequestParam(required = false) String descripcion) {
 

@@ -19,7 +19,7 @@ public class TareaController {
 
     @PostMapping(path = "/{id_ticket}/tareas") //
     //add new tarea to our system
-    public String createTarea(@PathParam("id_ticket") Integer ticketId, @RequestBody Tarea tarea){
+    public String createTarea(@PathVariable("id_ticket") Integer ticketId, @RequestBody Tarea tarea){
         final String uri = "https://moduloproyectos.herokuapp.com/" + tarea.getId() + "/tareas";
 
         RestTemplate restTemplate = new RestTemplate();
@@ -57,6 +57,9 @@ public class TareaController {
                 salir = true;
             }
             i++;
+        }
+        if (tarea == null) {
+            return null;
         }
 
         return tarea.getIdTicket();
