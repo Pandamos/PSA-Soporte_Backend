@@ -103,7 +103,7 @@ public class TareaController {
 
     @PostMapping (path = "/updateTarea/{id_proyecto}/{id_ticket}") //
     //link tarea to ticket
-    public Map<String, Object> updateTarea(@RequestBody Tarea tarea,
+    public String updateTarea(@RequestBody Tarea tarea,
                               @PathVariable("id_proyecto") Integer idProyecto,
                               @PathVariable("id_ticket") Integer idTicket) {
 
@@ -128,8 +128,10 @@ public class TareaController {
         tarea_map.put("nombre", tarea.getNombre());
         tarea_map.put("fechaCreacion", tarea.getFechaCreacion());
 
-        return tarea_map;
-        /*HttpEntity<Tarea> headerRequestEntity = new HttpEntity<Tarea>(tarea, headers);
+        JSONObject json = new JSONObject();
+        json.putAll(tarea_map);
+
+        HttpEntity<Tarea> headerRequestEntity = new HttpEntity<Tarea>(tarea, headers);
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.exchange(uri,HttpMethod.POST, headerRequestEntity, String.class).getBody();
 
@@ -138,6 +140,8 @@ public class TareaController {
 
         //RestTemplate restTemplate = new RestTemplate();
         restTemplate = new RestTemplate();
-        restTemplate.exchange(uri_addTicket, HttpMethod.POST, null, void.class);*/
+        restTemplate.exchange(uri_addTicket, HttpMethod.POST, null, void.class);
+
+        return result;
     }
 }
