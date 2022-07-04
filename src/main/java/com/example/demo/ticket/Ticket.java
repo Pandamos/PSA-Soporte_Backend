@@ -6,15 +6,6 @@ import com.example.demo.producto.VersionProducto;
 import com.example.demo.ticket.estado.*;
 import com.example.demo.ticket.estado.EstadoTicket;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import javax.persistence.*;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-
-
 
 public class Ticket {
 
@@ -35,7 +26,7 @@ public class Ticket {
     }
 
     public void setVersion(VersionProducto version) {
-        ticketTable.setVersionId(version.getCodigo_producto());
+        ticketTable.setVersionId(version.getId());
     }
 
     //public void setearEstado(){

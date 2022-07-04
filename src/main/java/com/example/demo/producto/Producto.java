@@ -1,5 +1,6 @@
 package com.example.demo.producto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Producto {
@@ -12,6 +13,7 @@ public class Producto {
         this.fase = fase;
         this.id = id;
         this.nombre = nombre;
+        this.versiones = new ArrayList<>();
     }
 
     public Integer getId() {
