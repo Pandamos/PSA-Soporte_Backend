@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "/recursos")
 public class EmpleadoController {
 
@@ -20,7 +20,7 @@ public class EmpleadoController {
 
     @GetMapping(path = "/empleadoById/{empleadoId}")
     public Empleado getEmpleadoById(@PathVariable("empleadoId") int empleadoId) {
-        final String uri = "https://squad5-recursos.herokuapp.com/api/empleados/{empleadoId}";
+        final String uri = "https://squad5-recursos.herokuapp.com/api/empleados/" + empleadoId;
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Empleado> response = restTemplate.getForEntity(uri, Empleado.class);
         return response.getBody();

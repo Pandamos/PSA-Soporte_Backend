@@ -12,7 +12,7 @@ import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@CrossOrigin(origins = "", allowedHeaders = "", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "/proyectos")
 public class TareaController {
@@ -54,7 +54,7 @@ public class TareaController {
     @PostMapping(path = "/tareas")
     //add new tarea to our system
     public String createTarea(@RequestBody Tarea tarea){
-        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/{" + tarea.getId() + "}/tareas";
+        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + tarea.getId() + "/tareas";
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -80,7 +80,7 @@ public class TareaController {
     //link tarea to ticket
     public String updateTarea(@PathParam("tareaId") Integer tareaId, @RequestBody TicketTable ticketTable) {
         //mandamos el ticket a los de proyectos
-        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/tareas/{" + tareaId + "}/tickets/{" + ticketTable.getId() + "}";
+        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/tareas/" + tareaId + "/tickets/" + ticketTable.getId();
 
         RestTemplate restTemplate = new RestTemplate();
 
