@@ -9,7 +9,7 @@ public class VersionProducto {
     private String numero_version;
     @JsonProperty("caracteristicas")
     private String caracteristicas;
-    @JsonProperty("producto")
+    @JsonProperty("productoId")
     private Integer productoId;
     public VersionProducto(){}
 

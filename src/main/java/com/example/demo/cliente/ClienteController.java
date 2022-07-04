@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping(path = "clientes")
+@RequestMapping(path = "/servicio_externo")
 public class ClienteController {
 
     @GetMapping(path = "/clientes")

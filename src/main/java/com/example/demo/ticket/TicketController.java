@@ -13,7 +13,7 @@ import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
-@RequestMapping(path = "/ticket")
+@RequestMapping(path = "soporte")
 public class TicketController {
     @Autowired
     private final TicketService ticketService;
@@ -22,7 +22,6 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
-
     //GETS
    @GetMapping(path = "/tickets")
     //update Ticket in system
@@ -30,7 +29,6 @@ public class TicketController {
         List<TicketTable> tickets = ticketService.getTicketsByVersion(versionId);
         return new ResponseEntity<>(tickets, HttpStatus.OK);
     }
-
 
     @GetMapping(path = "/productos") //todos los productos, con sus versiones
     public List<Producto> getProductos(){
