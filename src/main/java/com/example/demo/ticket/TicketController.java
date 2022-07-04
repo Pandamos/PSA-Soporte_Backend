@@ -83,7 +83,7 @@ public class TicketController {
                 514, //id
                 "1.1.0.0", //numero version
                 productoC, //producto
-                "Comienzo de nueva feaure" //caracteristicas
+                "Comienzo de nueva feature" //caracteristicas
         );
         productoC.setVersion(versionProductoC);
 
