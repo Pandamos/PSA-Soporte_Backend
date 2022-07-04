@@ -42,12 +42,24 @@ public class TareaController {
     }
 
     @GetMapping(path = "/ticket_table/{id_tarea}") //
-    public TicketTable[] getTicketByTarea(@PathVariable("id_tarea") Integer tareaId) {
-        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + tareaId;
+    public Integer getTicketIdByTarea(@PathVariable("id_tarea") Integer tareaId) {
+        final String uri = "https://moduloproyectos.herokuapp.com/tareas";
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<TicketTable[]> response = restTemplate.getForEntity(uri, TicketTable[].class);
-        TicketTable[] tickets = response.getBody();
-        return tickets;
+        Tarea[] tareas = restTemplate.getForEntity(uri, Tarea[].class).getBody();
+
+        Tarea tarea = null;
+
+        int i = 0;
+        boolean salir = false;
+        while (i < tareas.length && !salir) {
+            if (tareas[i].getId().equals(tareaId)) {
+                tarea = tareas[i];
+                salir = true;
+            }
+            i++;
+        }
+
+        return tarea.getIdTicket();
     }
 
     @GetMapping (path = "/tareas") //PROBADO
