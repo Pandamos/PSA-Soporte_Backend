@@ -11,9 +11,4 @@ import java.util.List;
 public interface TicketRepository extends CrudRepository<TicketTable,Integer> {
     @Query(value = "SELECT * FROM ticket_table c WHERE c.version_id=:versionId",nativeQuery = true)
     public List<TicketTable> findByVersion(@Param("versionId") Integer versionId);
-
-
-    //@Query("SELECT t FROM Ticket t WHERE t.id = ?1")
-    //Optional<TicketTable> findTicketById(Integer id);
-
 }

@@ -13,7 +13,7 @@ public class TicketTable implements Serializable {
     private Integer id;
 
     @Column(name = "CUIT_cliente",length = 50)
-    private String CUIT;
+    private String cuit;
 
     @Column(name = "fecha_creacion",length = 50)
     private DateFormat fechaDeCreacion;
@@ -44,7 +44,7 @@ public class TicketTable implements Serializable {
         this.estado = estado;
         this.fechaDeCreacion = fechaDeCreacion;
         this.fechaDeFinalizacion = fechaDeFinalizacion;
-        this.CUIT = CUIT;
+        this.cuit = CUIT;
         this.versionId = versionId;
     }
 
@@ -98,12 +98,12 @@ public class TicketTable implements Serializable {
         this.fechaDeCreacion = fechaDeCreacion;
     }
 
-    public String getCUIT() {
-        return CUIT;
+    public String getCuit() {
+        return cuit;
     }
 
-    public void setCUIT(String CUIT) {
-        this.CUIT = CUIT;
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
     }
 
     public Integer getVersionId() {

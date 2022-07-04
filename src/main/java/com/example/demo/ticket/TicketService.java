@@ -51,13 +51,13 @@ public class TicketService {
 
     //PUTS
     @Transactional
-    public void updateTicket(Integer ticketId, String CUIT, EstadoTicket estado, Integer severidad, DateFormat fechaVencimiento,DateFormat fechaInicial, String descripcion) {
+    public void updateTicket(Integer ticketId, String cuit, EstadoTicket estado, Integer severidad, DateFormat fechaVencimiento,DateFormat fechaInicial, String descripcion) {
         VersionProducto versionProducto = new VersionProducto();
         TicketTable ticketTable = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalStateException("ticket with id" + ticketId + "does not exist"));
         Ticket ticket = new Ticket(ticketTable,versionProducto);
 
-        if (CUIT != null && !Objects.equals(ticketTable.getCUIT(), CUIT)) {
-            ticketTable.setCUIT(CUIT);
+        if (cuit != null && !Objects.equals(ticketTable.getCuit(), cuit)) {
+            ticketTable.setCuit(cuit);
         }
 
         if (estado != null && !Objects.equals(ticketTable.getEstado(), estado.getestadoId())) {

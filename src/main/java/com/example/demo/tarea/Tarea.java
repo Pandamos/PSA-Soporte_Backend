@@ -1,6 +1,8 @@
 package com.example.demo.tarea;
 
 
+import java.text.DateFormat;
+
 public class Tarea {
     private String descripcion;
     private Integer empleados; //seguro?
@@ -10,7 +12,13 @@ public class Tarea {
     private Integer idTicket;
     private String nombre;
 
-    public Tarea(String descripcion, Integer empleados, //seguro?,
+    private DateFormat fechaCreacion;
+
+    public Tarea(){
+
+    }
+
+    public Tarea(String descripcion, Integer empleados, DateFormat fechaCreacion,
                 String estado, Integer id, Integer idProyecto, Integer idTicket, String nombre) {
         this.descripcion = descripcion;
         this.empleados = empleados;
@@ -19,6 +27,7 @@ public class Tarea {
         this.idProyecto = idProyecto;
         this.idTicket = idTicket;
         this.nombre = nombre;
+        this.fechaCreacion = fechaCreacion;
     }
 
     public String getDescripcion() {
@@ -75,5 +84,13 @@ public class Tarea {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public DateFormat getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(DateFormat fechaCreacion){
+        this.fechaCreacion = fechaCreacion;
     }
 }
