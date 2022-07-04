@@ -17,7 +17,7 @@ import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
-@RequestMapping(path = "psa_back_soporte")
+@RequestMapping(path = "/ticket/")
 public class TicketController {
     @Autowired
     private final TicketService ticketService;
@@ -28,7 +28,7 @@ public class TicketController {
 
 
     //GETS
-   @GetMapping(path = "/ticket")
+   @GetMapping(path = "/tickets")
     //update Ticket in system
     public ResponseEntity<List<TicketTable>> getTickets(@PathVariable @RequestParam (required = false) Integer versionId) {
         List<TicketTable> tickets = ticketService.getTicketsByVersion(versionId);
@@ -37,7 +37,7 @@ public class TicketController {
 
 
     @GetMapping(path = "/productos") //todos los productos, con sus versiones
-    public List<Producto> getProductos(){
+    public List<VersionProducto> getProductos(){
 
         //PRODUCTOS
         Producto productoA = new Producto(
@@ -105,9 +105,7 @@ public class TicketController {
         productos.add(productoB);
         productos.add(productoC);
 
-        System.out.println(productos);
-
-        return productos;
+        return versionesB;
     }
 
 
