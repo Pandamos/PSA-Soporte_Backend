@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,14 +48,19 @@ public class TicketService {
 
 
     //GETTERS
-    public List<Ticket> getTickets(Integer productoId, Integer versionId) {
+    public Iterable<TicketTable> getTickets(Integer versionId) {
         /*if (productoId != null && versionId != null) {
             return ticketRepository.findTicketsByProductIdAndVersionId(productoId, versionId);
         }*/
-        List<TicketTable> ticketTableList = ticketRepository.findAll();
-        //filtrar acá los tickets
+        Iterable<TicketTable> tickets = ticketRepository.findByVersion(versionId);
+        /*List<Ticket> ticketList = new ArrayList<>();
+        for(int i = 0; i < tickets.size(); i++){
+            Ticket ticket = new Ticket(tickets.get(i));
+            ticketList.add(ticket);
+        }
+        return ticketList; */
 
-        return null;
+        return tickets;
     }
 
     /*public List<TicketTable> getTicketsByEstadoByProductoAndVersion(EstadoTicket estado, Integer productoId, Integer versionId) {
@@ -66,9 +72,9 @@ public class TicketService {
         /*if (productoId != null && versionId != null) {
             tickets = ticketRepository.findTicketsByProductIdAndVersionId(productoId, versionId);
         } else {*/
-        tickets = ticketRepository.findAll();
+        //tickets = ticketRepository.findAll();
        //}
-        return tickets.size();
+        return 0;
 
     }
 

@@ -1,10 +1,6 @@
 package com.example.demo.producto;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-public class Version {
+public class VersionProducto {
    // @Id
    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -19,7 +15,7 @@ public class Version {
 
     private Producto producto;
 
-    public Version(Integer id, String numero_version, Producto producto, String caracteristicas) {
+    public VersionProducto(Integer id, String numero_version, Producto producto, String caracteristicas) {
         this.caracteristicas = caracteristicas;
         this.numero_version = numero_version;
         this.producto = producto;

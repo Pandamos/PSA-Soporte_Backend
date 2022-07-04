@@ -2,6 +2,7 @@ package com.example.demo.ticket;
 
 
 
+import com.example.demo.producto.VersionProducto;
 import com.example.demo.ticket.estado.*;
 import com.example.demo.ticket.estado.EstadoTicket;
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -17,22 +19,22 @@ import java.util.Objects;
 public class Ticket {
 
     private EstadoTicket estadoTicket;
-    private Version version;
+    private VersionProducto version;
 
     private TicketTable ticketTable;
 
-    public Ticket(){
+    public Ticket(TicketTable ticketTable){
         this.version = version;
-        this.ticketTable = new TicketTable();
+        this.ticketTable = ticketTable;
         this.estadoTicket = new Abierto();
     }
 
-    public Version getVersion() {
+    public VersionProducto getVersion() {
         return this.version;
     }
 
-    public void setVersion(Version version) {
-        this.version = version;
+    public void setVersion(VersionProducto version) {
+        ticketTable.setVersionId(version.getCodigo_producto());
     }
 
     //public void setearEstado(){
@@ -47,5 +49,9 @@ public class Ticket {
 
    public void abrirTicket(){
         ticketTable.setEstado(estadoTicket.getestadoId());
-    }
+   }
+
+
+
+
 }

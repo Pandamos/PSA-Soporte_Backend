@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 
 @Entity
-@Table(name = "tickets")
+@Table(name = "ticket_table")
 public class TicketTable implements Serializable {
 
     @Id
@@ -30,10 +30,13 @@ public class TicketTable implements Serializable {
     @Column(name = "estado",length = 50)
     private String estado;
 
+    @Column(name = "version_id",length = 50)
+    private Integer versionId;
+
     public TicketTable() {
     }
 
-    public TicketTable(Integer id, String descripcion, Integer severidad,DateFormat fechaDeCreacion,DateFormat fechaDeFinalizacion,String CUIT,String estado){
+    public TicketTable(Integer id, String descripcion, Integer severidad,DateFormat fechaDeCreacion,DateFormat fechaDeFinalizacion,String CUIT,String estado,Integer versionId){
         super();
         this.id = id;
         this.descripcion = descripcion;
@@ -42,6 +45,7 @@ public class TicketTable implements Serializable {
         this.fechaDeCreacion = fechaDeCreacion;
         this.fechaDeFinalizacion = fechaDeFinalizacion;
         this.CUIT = CUIT;
+        this.versionId = versionId;
     }
 
     public String getEstado() {
@@ -102,4 +106,11 @@ public class TicketTable implements Serializable {
         this.CUIT = CUIT;
     }
 
+    public Integer getVersionId() {
+        return versionId;
+    }
+
+    public void setVersionId(Integer versionId) {
+        this.versionId = versionId;
+    }
 }

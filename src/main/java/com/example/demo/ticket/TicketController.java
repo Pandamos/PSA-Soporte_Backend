@@ -3,17 +3,14 @@ package com.example.demo.ticket;
 import com.example.demo.cliente.Cliente;
 import com.example.demo.empleado.Empleado;
 import com.example.demo.producto.Producto;
-import com.example.demo.producto.Version;
+import com.example.demo.producto.VersionProducto;
 import com.example.demo.tarea.Tarea;
-import com.example.demo.ticket.estado.Abierto;
-import com.example.demo.ticket.estado.Cerrado;
 import com.example.demo.ticket.estado.EstadoTicket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.util.*;
 
@@ -29,12 +26,11 @@ public class TicketController {
 
 
     //GETS
-   @GetMapping(path = "/tickets")
+   @GetMapping(path = "/ticket_table")
     //update Ticket in system
-    public List<Ticket> getTickets(
-            @PathVariable("productoId") @RequestParam(required = false) Integer productoId,
+    public Iterable<TicketTable> getTickets(
             @PathVariable("versionId") @RequestParam(required = false) Integer versionId) {
-        return ticketService.getTickets(productoId, versionId);
+        return ticketService.getTickets(versionId);
     }
 
     @GetMapping(path = "/cantidadTickets/{id_producto}-{id_version}")
@@ -44,7 +40,7 @@ public class TicketController {
         return ticketService.getCantidadTickets(productoId, versionId);
     }
 
-    @GetMapping(path = "/tickets/{id_producto}, {id_version}")
+    @GetMapping(path = "/ticket_table/{id_producto}, {id_version}")
     public List<Integer> getCantidadTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
                                                              @PathVariable("id_version") Integer versionId) {
         //Integer cantAbiertos = ticketService.getCantidadTicketsByEstadoByProductoAndVersion(new Abierto(), productoId, versionId);
@@ -77,14 +73,14 @@ public class TicketController {
         );
 
         //VERSIONES
-        Version versionB1 = new Version(
+        VersionProducto versionProductoB1 = new VersionProducto(
                 10, //id
                 "0.9.8", //numero version
                 productoB, //producto
                 "Casi listo para el release. Necesita testing en el bug encontrado por el usuario" //caracteristicas
         );
 
-        Version versionB2 = new Version(
+        VersionProducto versionProductoB2 = new VersionProducto(
                 145,
                 "1.0.2",
                 productoB,
@@ -97,7 +93,7 @@ public class TicketController {
         return List.of(productoA, productoB, productoC);
     }
 
-    @GetMapping(path = "url_server_soporte/tickets/{id_producto}, {id_version}")
+    @GetMapping(path = "url_server_soporte/ticket_table/{id_producto}, {id_version}")
     public List<List<Ticket>> getTicketsByEstadoProductoAndVersion(@PathVariable("id_producto") Integer productoId,
                                                                    @PathVariable("id_version") Integer versionId) {
        // List<Ticket> ticketsAbiertos = ticketService.getTicketsByEstadoByProductoAndVersion(new Abierto(), productoId, versionId);
@@ -134,7 +130,7 @@ public class TicketController {
     }
 
     //  GETTERS de PROJECTOS
-    @GetMapping(path = "/tickets/{id_tarea}") //ayuda de fer -- revisar
+    @GetMapping(path = "/ticket_table/{id_tarea}") //ayuda de fer -- revisar
     public ArrayList<Tarea> getTicketByTarea(@PathVariable("tareaId") Integer tareaId) {
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + tareaId;
         RestTemplate restTemplate = new RestTemplate();
@@ -147,7 +143,7 @@ public class TicketController {
     @PostMapping
     //add new ticket to our system
     public void createTicket(@RequestBody TicketTable ticketTable){
-        Ticket ticket = new Ticket();
+        Ticket ticket = new Ticket(ticketTable);
         ticket.abrirTicket();
         ticketService.createTicket(ticketTable);
     }
