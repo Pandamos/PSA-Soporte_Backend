@@ -131,7 +131,7 @@ public class TareaController {
         JSONObject json = new JSONObject();
         json.putAll(tarea_map);
 
-        HttpEntity<Tarea> headerRequestEntity = new HttpEntity<Tarea>(tarea, headers);
+        HttpEntity<JSONObject> headerRequestEntity = new HttpEntity<JSONObject>(json, headers);
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.exchange(uri,HttpMethod.POST, headerRequestEntity, String.class).getBody();
 
