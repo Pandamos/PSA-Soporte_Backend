@@ -22,7 +22,7 @@ public class TicketController {
     }
 
     //GETS
-   @GetMapping(path = "/tickets/{versionId}")
+   @GetMapping(path = "/tickets")
     //update Ticket in system
     public ResponseEntity<List<TicketTable>> getTickets(@PathVariable @RequestParam (required = false) Integer versionId) {
         List<TicketTable> tickets = ticketService.getTicketsByVersion(versionId);

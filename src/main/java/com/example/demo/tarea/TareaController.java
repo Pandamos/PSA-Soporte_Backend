@@ -99,11 +99,11 @@ public class TareaController {
         return proyectos;
     }
 
-    @PostMapping (path = "/updateTarea/{id_proyecto}/{id_ticket") //
+    @PostMapping (path = "/updateTarea/{id_proyecto}/{id_ticket}") //
     //link tarea to ticket
-    public String updateTarea(@PathParam("id_proyecto") Integer idProyecto,
+    public String updateTarea(@PathVariable("id_proyecto") Integer idProyecto,
                               @RequestBody Tarea tarea,
-                              @PathParam("id_ticket") Integer idTicket) {
+                              @PathVariable("id_ticket") Integer idTicket) {
         //mandamos el ticket a los de proyectos
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas" + tarea.getId();
 
