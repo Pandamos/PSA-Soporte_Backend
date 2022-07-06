@@ -139,7 +139,7 @@ public class TareaController {
 */
 
         //mandamos la actualización de la tarea a los de proyectos
-        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + idTarea;
+        final String uri = "https://moduloproyectos.herokuapp.com/tareas/" + idProyecto + "/tareas/" + idTarea;
         HttpHeaders headers = new HttpHeaders();
 /*
         JSONObject tareaJsonObject = new JSONObject();
