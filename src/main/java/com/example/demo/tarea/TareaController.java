@@ -2,6 +2,7 @@ package com.example.demo.tarea;
 
 import com.example.demo.empleado.Empleado;
 import com.example.demo.ticket.*;
+import com.google.gson.Gson;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -139,6 +140,7 @@ public class TareaController {
         //mandamos la actualización de la tarea a los de proyectos
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + tarea.getId();
         HttpHeaders headers = new HttpHeaders();
+/*
         JSONObject tareaJsonObject = new JSONObject();
 
         tareaJsonObject.put("id", tarea.getId());
@@ -148,8 +150,10 @@ public class TareaController {
         tareaJsonObject.put("fechaCreacion", tarea.getFechaCreacion());
         tareaJsonObject.put("idTicket", tarea.getIdTicket());
         tareaJsonObject.put("idProyecto", tarea.getIdProyecto());
-
-        HttpEntity<String> requestPost = new HttpEntity<String>(tareaJsonObject.toString(), headers);
+*/
+        Gson gson = new Gson();
+        String json_tarea = gson.toJson(tarea);
+        HttpEntity<String> requestPost = new HttpEntity<String>(json_tarea, headers);
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForObject(uri, requestPost, String.class);
 
