@@ -137,6 +137,7 @@ public class TareaController {
 */
 
         //mandamos la actualización de la tarea a los de proyectos
+        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + tarea.getId();
         HttpHeaders headers = new HttpHeaders();
         JSONObject tareaJsonObject = new JSONObject();
 
@@ -150,7 +151,7 @@ public class TareaController {
 
         HttpEntity<String> requestPost = new HttpEntity<String>(tareaJsonObject.toString(), headers);
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForObject("url_api_proyectos", requestPost, String.class);
+        restTemplate.postForObject(uri, requestPost, String.class);
 
 
         //linkeamos el ticket con la tarea
