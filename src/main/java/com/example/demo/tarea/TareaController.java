@@ -126,12 +126,12 @@ public class TareaController {
         tarea_map.put("nombre", tarea.getNombre());
         tarea_map.put("fechaCreacion", tarea.getFechaCreacion());
 
-        JSONObject json = new JSONObject();
-        json.putAll(tarea_map);
+     //   JSONObject json = new JSONObject();
+     //   json.putAll(tarea_map);
 
-        HttpEntity<JSONObject> headerRequestEntity = new HttpEntity<JSONObject>(json, headers);
+        HttpEntity<?> headerRequestEntity = new HttpEntity<>(headers);
         RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.exchange(uri, HttpMethod.POST, headerRequestEntity, String.class).getBody();
+        String result = restTemplate.exchange(uri, HttpMethod.POST, headerRequestEntity, String.class, tarea_map).getBody();
 
 
       /*  //mandamos la actualización de la tarea a los de proyectos
