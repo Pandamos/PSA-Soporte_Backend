@@ -1,15 +1,10 @@
 package com.example.demo.tarea;
 
-import com.example.demo.empleado.Empleado;
-import com.example.demo.ticket.*;
 import com.google.gson.Gson;
-import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import javax.websocket.server.PathParam;
 import java.util.*;
 
 @CrossOrigin(origins = "*")
@@ -104,10 +99,10 @@ public class TareaController {
 
     @PutMapping (path = "/updateTarea/{id_proyecto}/{id_tarea}/{id_ticket}") //
     //link tarea to ticket
-    public void updateTarea(@RequestBody Tarea tarea,
-                            @PathVariable("id_proyecto") Integer idProyecto,
-                            @PathVariable("id_tarea") Integer idTarea,
-                            @PathVariable("id_ticket") Integer idTicket) {
+    public String updateTarea(@RequestBody Tarea tarea,
+                                              @PathVariable("id_proyecto") Integer idProyecto,
+                                              @PathVariable("id_tarea") Integer idTarea,
+                                              @PathVariable("id_ticket") Integer idTicket) {
 
        /* //mandamos la actualización de la tarea a los de proyectos
        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + tarea.getId();
@@ -154,9 +149,9 @@ public class TareaController {
 */
         Gson gson = new Gson();
         String json_tarea = gson.toJson(tarea);
-        HttpEntity<String> requestPut = new HttpEntity<String>(json_tarea, headers);
+        HttpEntity<String> requestPut = new HttpEntity<>(json_tarea, headers);
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForObject(uri, requestPut, String.class);
+        String response = restTemplate.exchange(uri, HttpMethod.PUT, requestPut, String.class).getBody();
 
 
         //linkeamos el ticket con la tarea
@@ -164,6 +159,8 @@ public class TareaController {
 
         restTemplate = new RestTemplate();
         restTemplate.exchange(uri_addTicket, HttpMethod.POST, null, void.class);
+
+        return response;
 
     }
 }
