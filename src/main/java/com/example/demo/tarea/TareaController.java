@@ -1,6 +1,7 @@
 package com.example.demo.tarea;
 
 import com.google.gson.Gson;
+import org.json.simple.JSONObject;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -104,7 +105,7 @@ public class TareaController {
                                               @PathVariable("id_tarea") Integer idTarea,
                                               @PathVariable("id_ticket") Integer idTicket) {
 
-       /* //mandamos la actualización de la tarea a los de proyectos
+        //mandamos la actualización de la tarea a los de proyectos
        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + tarea.getId();
         // tarea.setIdTicket(idTicket);
 
@@ -131,12 +132,12 @@ public class TareaController {
         HttpEntity<JSONObject> headerRequestEntity = new HttpEntity<JSONObject>(json, headers);
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.exchange(uri, HttpMethod.POST, headerRequestEntity, String.class).getBody();
-*/
 
-        //mandamos la actualización de la tarea a los de proyectos
+
+      /*  //mandamos la actualización de la tarea a los de proyectos
         final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + idTarea;
         HttpHeaders headers = new HttpHeaders();
-/*
+*//*
         JSONObject tareaJsonObject = new JSONObject();
 
         tareaJsonObject.put("id", tarea.getId());
@@ -146,12 +147,13 @@ public class TareaController {
         tareaJsonObject.put("fechaCreacion", tarea.getFechaCreacion());
         tareaJsonObject.put("idTicket", tarea.getIdTicket());
         tareaJsonObject.put("idProyecto", tarea.getIdProyecto());
-*/
+*//*
         Gson gson = new Gson();
         String json_tarea = gson.toJson(tarea);
         HttpEntity<String> requestPut = new HttpEntity<>(json_tarea, headers);
         RestTemplate restTemplate = new RestTemplate();
-        String response = restTemplate.exchange(uri, HttpMethod.PUT, requestPut, String.class).getBody();
+        ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.PUT, requestPut, String.class, );
+        String response2 = response.getBody();*/
 
 
         //linkeamos el ticket con la tarea
@@ -160,7 +162,7 @@ public class TareaController {
         restTemplate = new RestTemplate();
         restTemplate.exchange(uri_addTicket, HttpMethod.POST, null, void.class);
 
-        return response;
+        return result;
 
     }
 }
