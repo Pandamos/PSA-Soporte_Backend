@@ -163,7 +163,7 @@ public class TareaController {
         final String uri_addTicket = "https://moduloproyectos.herokuapp.com/tareas/" + idTarea + "/tickets/" + idTicket;
 
         restTemplate = new RestTemplate();
-        restTemplate.exchange(uri_addTicket, HttpMethod.PUT, null, void.class);
+        restTemplate.exchange(uri_addTicket, HttpMethod.POST, null, void.class);
 
     }
 }
