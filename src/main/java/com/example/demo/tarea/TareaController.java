@@ -135,10 +135,28 @@ public class TareaController {
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.exchange(uri, HttpMethod.POST, headerRequestEntity, String.class).getBody();
 */
+
+        //mandamos la actualización de la tarea a los de proyectos
+        HttpHeaders headers = new HttpHeaders();
+        JSONObject tareaJsonObject = new JSONObject();
+
+        tareaJsonObject.put("id", tarea.getId());
+        tareaJsonObject.put("nombre", tarea.getNombre());
+        tareaJsonObject.put("descripcion", tarea.getDescripcion());
+        tareaJsonObject.put("estado", tarea.getEstado());
+        tareaJsonObject.put("fechaCreacion", tarea.getFechaCreacion());
+        tareaJsonObject.put("idTicket", tarea.getIdTicket());
+        tareaJsonObject.put("idProyecto", tarea.getIdProyecto());
+
+        HttpEntity<String> requestPost = new HttpEntity<String>(tareaJsonObject.toString(), headers);
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.postForObject("url_api_proyectos", requestPost, String.class);
+
+
         //linkeamos el ticket con la tarea
         final String uri_addTicket = "https://moduloproyectos.herokuapp.com/tareas/" + tarea.getId() + "/tickets/" + idTicket;
 
-        RestTemplate restTemplate = new RestTemplate();
+        restTemplate = new RestTemplate();
         restTemplate.exchange(uri_addTicket, HttpMethod.POST, null, void.class);
 
     }
