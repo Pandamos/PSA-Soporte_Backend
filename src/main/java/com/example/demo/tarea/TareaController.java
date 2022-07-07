@@ -69,33 +69,12 @@ public class TareaController {
     }
 
 
-  /*  @PostMapping(path = "/{id_ticket}/tarea") //
-    //add new tarea to our system
-    public String createTarea(@PathVariable("id_ticket") Integer ticketId, @RequestBody Tarea tarea){
-        final String uri = "https://moduloproyectos.herokuapp.com/" + tarea.getId() + "/tareas";
-
-        RestTemplate restTemplate = new RestTemplate();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-
-        HttpEntity<Tarea> headerRequestEntity = new HttpEntity<Tarea>(tarea, headers);
-
-        String response = restTemplate.exchange(uri, HttpMethod.POST, headerRequestEntity, String.class).getBody();
-
-        //linkeamos el ticket con la tarea
-        final String uri_addTicket = "https://moduloproyectos.herokuapp.com/tareas/" + tarea.getId() + "/tickets/" + ticketId;
-
-        restTemplate = new RestTemplate();
-        restTemplate.exchange(uri_addTicket, HttpMethod.POST, null, void.class);
-
-        return response;
-    }
-*/
     @PostMapping(path = "/{id_ticket}/{id_proyecto}/tarea", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> createTarea(@PathVariable("id_ticket") Integer ticketId,
                                               @PathVariable("id_proyecto") Integer proyectoId,
                                               @RequestBody Tarea tarea) {
+        tarea.setIdTicket(ticketId);
+
         String url = "https://moduloproyectos.herokuapp.com/proyectos/" + proyectoId + "/tareas";
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForEntity(url, tarea, String.class);
