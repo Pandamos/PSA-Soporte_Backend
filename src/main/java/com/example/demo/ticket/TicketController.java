@@ -37,6 +37,13 @@ public class TicketController {
         return ticket;
     }
 
+    //Devuelve todos los tickets
+    @GetMapping(path = "/allTickets")
+    public List<TicketTable> getAllTickets(){
+        List<TicketTable> tickets = ticketService.getAllTickets();
+        return tickets;
+    }
+
     @GetMapping(path = "/productos")
     //devuelve todos los productos, con sus versiones
     //no puede fallar

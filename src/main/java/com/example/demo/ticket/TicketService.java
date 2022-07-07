@@ -85,4 +85,9 @@ public class TicketService {
         TicketTable ticketTable = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalStateException("ticket with id" + ticketId + "does not exist"));
         return ticketTable;
     }
+
+    public List<TicketTable> getAllTickets() {
+        List<TicketTable> ticketTables = (List<TicketTable>) ticketRepository.findAll();
+        return ticketTables;
+    }
 }
