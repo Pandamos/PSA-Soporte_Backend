@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.sql.Date;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -128,8 +129,8 @@ public class TicketController {
                                                         @RequestParam(required = false) String cuit,
                                                         @RequestParam(required = false) String estado,
                                                         @RequestParam(required = false) Integer severidad,
-                                                        @RequestParam(required = false) LocalDate fechaVencimiento,
-                                                        @RequestParam(required = false) LocalDate fechaInicial,
+                                                        @RequestParam(required = false) String fechaVencimiento,
+                                                        @RequestParam(required = false) String fechaInicial,
                                                         @RequestParam(required = false) String descripcion) {
 
         TicketTable ticketTableResponse = ticketService.updateTicket(ticketId, cuit, estado, severidad,

@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Date;
 import java.text.DateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -47,7 +47,7 @@ public class TicketService {
 
     //PUTS
     @Transactional
-    public TicketTable updateTicket(Integer ticketId, String cuit, String estado, Integer severidad, LocalDate fechaVencimiento, LocalDate fechaInicial, String descripcion) {
+    public TicketTable updateTicket(Integer ticketId, String cuit, String estado, Integer severidad, String fechaVencimiento, String fechaInicial, String descripcion) {
         TicketTable ticketTable = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalStateException("ticket with id" + ticketId + "does not exist"));
         Ticket ticket = new Ticket(ticketTable);
 

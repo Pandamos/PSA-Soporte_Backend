@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.text.DateFormat;
-import java.time.LocalDate;
+import java.sql.Date;
 
 @Entity
 @Table(name = "ticket_table")
@@ -24,10 +24,10 @@ public class TicketTable implements Serializable {
     private String descripcion;
     @Column(name = "fecha_creacion",length = 50)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private LocalDate fechaDeCreacion;
+    private String fechaDeCreacion;
     @Column(name = "fecha_finalizacion",length = 50)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private LocalDate fechaDeFinalizacion;
+    private String fechaDeFinalizacion;
     @Column(name = "severidad",length = 50)
     private Integer severidad;
     @Column(name = "version_id",length = 50)
@@ -38,7 +38,7 @@ public class TicketTable implements Serializable {
     public TicketTable() {
     }
 
-    public TicketTable(Integer id, String descripcion, Integer severidad,LocalDate fechaDeCreacion,LocalDate fechaDeFinalizacion,String CUIT,String estado,Integer versionId, String titulo, Integer legajoResponsable){
+    public TicketTable(Integer id, String descripcion, Integer severidad,String fechaDeCreacion,String fechaDeFinalizacion,String CUIT,String estado,Integer versionId, String titulo, Integer legajoResponsable){
         super();
         this.id = id;
         this.descripcion = descripcion;
@@ -84,18 +84,18 @@ public class TicketTable implements Serializable {
         this.severidad = severidad;
     }
 
-    public LocalDate getFechaDeFinalizacion() {
+    public String getFechaDeFinalizacion() {
         return fechaDeFinalizacion;
     }
 
-    public void setFechaDeFinalizacion(LocalDate fechaDeFinalizacion) {
+    public void setFechaDeFinalizacion(String fechaDeFinalizacion) {
         this.fechaDeFinalizacion = fechaDeFinalizacion;
     }
-    public LocalDate getFechaDeCreacion() {
+    public String getFechaDeCreacion() {
         return fechaDeCreacion;
     }
 
-    public void setFechaDeCreacion(LocalDate fechaDeCreacion) {
+    public void setFechaDeCreacion(String fechaDeCreacion) {
         this.fechaDeCreacion = fechaDeCreacion;
     }
 
