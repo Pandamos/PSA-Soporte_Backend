@@ -105,7 +105,7 @@ public class TareaController {
     }
 
 
-    @PutMapping (path = "/updateTarea/{id_tarea}/{id_ticket}") //
+    @PostMapping (path = "/updateTarea/{id_tarea}/{id_ticket}") //
     //link tarea to ticket
     public void updateTarea(@PathVariable("id_tarea") Integer idTarea, @PathVariable("id_ticket") Integer idTicket) {
         //linkeamos el ticket con la tarea
