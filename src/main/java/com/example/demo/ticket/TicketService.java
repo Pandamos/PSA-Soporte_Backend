@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.text.DateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -86,8 +87,9 @@ public class TicketService {
         return ticketTable;
     }
 
-    public Iterable<TicketTable> getAllTickets() {
-        Iterable<TicketTable> ticketTables = ticketRepository.findAll();
+    public List<TicketTable> getAllTickets() {
+        List<TicketTable> ticketTables = new ArrayList<>();
+        ticketRepository.findAll().forEach(ticketTables::add);
         return ticketTables;
     }
 }

@@ -39,8 +39,8 @@ public class TicketController {
 
     //Devuelve todos los tickets
     @GetMapping(path = "/allTickets")
-    public Iterable<TicketTable> getAllTickets(){
-        Iterable<TicketTable> tickets = ticketService.getAllTickets();
+    public List<TicketTable> getAllTickets(){
+        List<TicketTable> tickets = ticketService.getAllTickets();
         return tickets;
     }
 
