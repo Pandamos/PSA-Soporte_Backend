@@ -1,12 +1,8 @@
 package com.example.demo.tarea;
 
-import com.google.gson.Gson;
-import org.json.simple.JSONObject;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.*;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -97,7 +93,7 @@ public class TareaController {
     }
 */
     @PostMapping(path = "/{id_ticket}/tarea", consumes = "application/json", produces = "application/json")
-    public Object createTarea(@PathVariable("id_ticket") Integer ticketId, @RequestBody Tarea tarea) {
+    public ResponseEntity<String> createTarea(@PathVariable("id_ticket") Integer ticketId, @RequestBody Tarea tarea) {
         tarea.setIdTicket(ticketId);
         String url = "https://moduloproyectos.herokuapp.com/" + tarea.getId() + "/tareas";
         RestTemplate restTemplate = new RestTemplate();
