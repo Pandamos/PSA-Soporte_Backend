@@ -20,6 +20,10 @@ public class Ticket {
         this.estadoTicket = new Abierto();
     }
 
+    public Ticket(TicketTable ticketTable){
+        this.ticketTable = ticketTable;
+        this.estadoTicket = new Abierto();
+    }
 
     public VersionProducto getVersion() {
         return this.version;
@@ -29,24 +33,13 @@ public class Ticket {
         ticketTable.setVersionId(version.getId());
     }
 
-    public void setearEstado(){
-        ticketTable.setEstado(estadoTicket.getestadoId());
-    }
-    public void cambiarEstado(String estadoTicket){
-        this.estadoTicket = this.estadoTicket.cambiarEstado(estadoTicket);
+    public void abrirTicket(){
+        estadoTicket = estadoTicket.abrir();
+        ticketTable.setEstado(estadoTicket.getEstadoString());
     }
 
     public void cerrarTicket(){
-       this.estadoTicket = estadoTicket.cerrar();
-       ticketTable.setEstado(estadoTicket.getestadoId());
+        estadoTicket = estadoTicket.cerrar();
+        ticketTable.setEstado(estadoTicket.getEstadoString());
     }
-
-   public void abrirTicket(){
-       this.estadoTicket = estadoTicket.abrir();
-        ticketTable.setEstado(estadoTicket.getestadoId());
-   }
-
-
-
-
 }

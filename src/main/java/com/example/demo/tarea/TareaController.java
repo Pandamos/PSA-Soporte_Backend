@@ -73,7 +73,7 @@ public class TareaController {
     }
 
 
-    @PostMapping(path = "/{id_ticket}/tarea") //
+  /*  @PostMapping(path = "/{id_ticket}/tarea") //
     //add new tarea to our system
     public String createTarea(@PathVariable("id_ticket") Integer ticketId, @RequestBody Tarea tarea){
         final String uri = "https://moduloproyectos.herokuapp.com/" + tarea.getId() + "/tareas";
@@ -95,74 +95,24 @@ public class TareaController {
 
         return response;
     }
+*/
+    @PostMapping(path = "/{id_ticket}/tarea", consumes = "application/json", produces = "application/json")
+    public Object createTarea(@PathVariable("id_ticket") Integer ticketId, @RequestBody Tarea tarea) {
+        tarea.setIdTicket(ticketId);
+        String url = "https://moduloproyectos.herokuapp.com/" + tarea.getId() + "/tareas";
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.postForEntity(url, tarea, String.class);
+    }
 
 
-
-    @PutMapping (path = "/updateTarea/{id_proyecto}/{id_tarea}/{id_ticket}") //
+    @PutMapping (path = "/updateTarea/{id_tarea}/{id_ticket}") //
     //link tarea to ticket
-    public String updateTarea(@RequestBody Tarea tarea,
-                                              @PathVariable("id_proyecto") Integer idProyecto,
-                                              @PathVariable("id_tarea") Integer idTarea,
-                                              @PathVariable("id_ticket") Integer idTicket) {
-
-        //mandamos la actualización de la tarea a los de proyectos
-       final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + tarea.getId();
-        // tarea.setIdTicket(idTicket);
-
-        HttpHeaders headers = new HttpHeaders();
-        // headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        // set `content-type` header
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        // set `accept` header
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-
-
-        Map<String, Object> tarea_map = new HashMap<>();
-        tarea_map.put("descripcion", tarea.getDescripcion());
-        tarea_map.put("estado", tarea.getEstado());
-        tarea_map.put("id", tarea.getId());
-        //tarea_map.put("idProyecto",idProyecto);
-        //tarea_map.put("idTicket", idTicket);
-        tarea_map.put("nombre", tarea.getNombre());
-        tarea_map.put("fechaCreacion", tarea.getFechaCreacion());
-
-     //   JSONObject json = new JSONObject();
-     //   json.putAll(tarea_map);
-
-        HttpEntity<?> headerRequestEntity = new HttpEntity<>(headers);
-        RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.exchange(uri, HttpMethod.POST, headerRequestEntity, String.class, tarea_map).getBody();
-
-
-      /*  //mandamos la actualización de la tarea a los de proyectos
-        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + idTarea;
-        HttpHeaders headers = new HttpHeaders();
-*//*
-        JSONObject tareaJsonObject = new JSONObject();
-
-        tareaJsonObject.put("id", tarea.getId());
-        tareaJsonObject.put("nombre", tarea.getNombre());
-        tareaJsonObject.put("descripcion", tarea.getDescripcion());
-        tareaJsonObject.put("estado", tarea.getEstado());
-        tareaJsonObject.put("fechaCreacion", tarea.getFechaCreacion());
-        tareaJsonObject.put("idTicket", tarea.getIdTicket());
-        tareaJsonObject.put("idProyecto", tarea.getIdProyecto());
-*//*
-        Gson gson = new Gson();
-        String json_tarea = gson.toJson(tarea);
-        HttpEntity<String> requestPut = new HttpEntity<>(json_tarea, headers);
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.PUT, requestPut, String.class, );
-        String response2 = response.getBody();*/
-
-
+    public void updateTarea(@PathVariable("id_tarea") Integer idTarea, @PathVariable("id_ticket") Integer idTicket) {
         //linkeamos el ticket con la tarea
         final String uri_addTicket = "https://moduloproyectos.herokuapp.com/tareas/" + idTarea + "/tickets/" + idTicket;
 
-        restTemplate = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
         restTemplate.exchange(uri_addTicket, HttpMethod.POST, null, void.class);
-
-        return result;
 
     }
 }

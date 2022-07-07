@@ -35,7 +35,6 @@ public class TicketTable implements Serializable {
     @Column(name = "legajo_responsable",length = 50)
     private Integer legajoResponsable;
 
-
     public TicketTable() {
     }
 
@@ -92,7 +91,6 @@ public class TicketTable implements Serializable {
     public void setFechaDeFinalizacion(LocalDate fechaDeFinalizacion) {
         this.fechaDeFinalizacion = fechaDeFinalizacion;
     }
-
     public LocalDate getFechaDeCreacion() {
         return fechaDeCreacion;
     }
@@ -109,31 +107,8 @@ public class TicketTable implements Serializable {
         this.cuit = cuit;
     }
 
-    public Integer getVersionId() {
-        return versionId;
-    }
-
     public void setVersionId(Integer versionId) {
         this.versionId = versionId;
     }
 
-    public void cambiarEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public Integer getLegajoResponsable() {
-        return legajoResponsable;
-    }
-
-    public void setLegajoResponsable(Integer legajoResponsable) {
-        this.legajoResponsable = legajoResponsable;
-    }
 }

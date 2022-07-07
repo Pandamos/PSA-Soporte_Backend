@@ -11,7 +11,6 @@ public class VersionProducto {
     private String caracteristicas;
     @JsonProperty("productoId")
     private Integer productoId;
-    public VersionProducto(){}
 
     public VersionProducto(Integer id, String numero_version, Integer productoID, String caracteristicas) {
         this.caracteristicas = caracteristicas;

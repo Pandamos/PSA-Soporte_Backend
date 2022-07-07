@@ -23,14 +23,17 @@ public class TicketController {
 
     //GETS
    @GetMapping(path = "/tickets")
-    //update Ticket in system
+    //devuelve Response Entity de lista de tickets
+    //si ningun ticket matchea con el versionId pasado, se devuelve un response entity de una lista vacía
+    //el status siempre es Ok
     public ResponseEntity<List<TicketTable>> getTickets(@PathVariable @RequestParam (required = false) Integer versionId) {
         List<TicketTable> tickets = ticketService.getTicketsByVersion(versionId);
         return new ResponseEntity<>(tickets, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/productos") //funciona
-    //todos los productos, con sus versiones
+    @GetMapping(path = "/productos")
+    //devuelve todos los productos, con sus versiones
+    //no puede fallar
     public List<Producto> getProductos(){
 
         //PRODUCTOS
@@ -96,10 +99,11 @@ public class TicketController {
 
     // POSTS
     @PostMapping(path = "/ticket") //funciona
-    //add new ticket to our system
-    public ResponseEntity<TicketTable> createTicket(@RequestBody TicketTable ticketTable){
-        VersionProducto versionProducto = new VersionProducto();
-        Ticket ticket = new Ticket(ticketTable,versionProducto);
+    //crea un ticket nuevo al sistema
+    //devuelve un response entity con el status CREATED y la nueva ticketTable
+    public ResponseEntity<TicketTable> createTicket(@RequestBody TicketTable ticketTable, @RequestBody VersionProducto versionProducto){
+        Ticket ticket = new Ticket(ticketTable, versionProducto);
+        ticket.setVersion(versionProducto);
         TicketTable ticketTableResultado = ticketService.createTicket(ticketTable);
         return new ResponseEntity<>(ticketTableResultado,HttpStatus.CREATED);
     }

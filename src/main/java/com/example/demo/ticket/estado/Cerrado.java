@@ -12,23 +12,8 @@ public class Cerrado implements EstadoTicket{
         throw new RuntimeException("Imposible cerrar un ticket ya cerrado");
     }
 
-    @Override
-    public EstadoTicket derivar() {
-        throw new RuntimeException("Imposible derivar un ticket ya cerrado");
-    }
-
-    public String getestadoId() {
+    public String getEstadoString() {
         return "cerrado";
-    }
-
-    @Override
-    public EstadoTicket cambiarEstado(String estado) {
-        if(estado.equals("cerrado")){
-            throw new RuntimeException("Imposible cerrar un ticket ya cerrado");
-        }
-        else {
-            return new Abierto();
-        }
     }
 
 }

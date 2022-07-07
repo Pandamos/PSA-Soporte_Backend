@@ -12,22 +12,9 @@ public class Abierto implements EstadoTicket{
         return new Cerrado();
     }
 
-    @Override
-    public EstadoTicket derivar() {
-        return null;
-    }
 
-    public String getestadoId(){
+    public String getEstadoString(){
         return "abierto";
     }
 
-    @Override
-    public EstadoTicket cambiarEstado(String estado) {
-        if(estado.equals("abrir")){
-            throw new RuntimeException("Imposible abrir un ticket ya abierto");
-        }
-        else {
-            return new Cerrado();
-        }
-    }
 }
