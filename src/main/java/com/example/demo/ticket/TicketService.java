@@ -81,4 +81,8 @@ public class TicketService {
         return ticketRepository.save(ticketTable);
     }
 
+    public TicketTable getTicketById(Integer ticketId) {
+        TicketTable ticketTable = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalStateException("ticket with id" + ticketId + "does not exist"));
+        return ticketTable;
+    }
 }
