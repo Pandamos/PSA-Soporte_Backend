@@ -1,6 +1,5 @@
 package com.example.demo.tarea;
 
-import com.example.demo.empleado.Empleado;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -94,16 +93,12 @@ public class TareaController {
     }
 */
     @PostMapping(path = "/{id_ticket}/{id_proyecto}/tarea", consumes = "application/json", produces = "application/json")
-    public Tarea createTarea(@PathVariable("id_ticket") Integer ticketId,
+    public ResponseEntity<String> createTarea(@PathVariable("id_ticket") Integer ticketId,
                                               @PathVariable("id_proyecto") Integer proyectoId,
                                               @RequestBody Tarea tarea) {
-        tarea.setIdTicket(ticketId);
-
-        return tarea;
-        /*
         String url = "https://moduloproyectos.herokuapp.com/proyectos/" + proyectoId + "/tareas";
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForEntity(url, tarea, String.class);*/
+        return restTemplate.postForEntity(url, tarea, String.class);
     }
 
     @PutMapping (path = "/updateTarea/{id_tarea}/{id_ticket}") //
