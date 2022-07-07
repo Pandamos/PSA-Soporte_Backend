@@ -86,8 +86,8 @@ public class TicketService {
         return ticketTable;
     }
 
-    public List<TicketTable> getAllTickets() {
-        List<TicketTable> ticketTables = (List<TicketTable>) ticketRepository.findAll();
+    public Iterable<TicketTable> getAllTickets() {
+        Iterable<TicketTable> ticketTables = ticketRepository.findAll();
         return ticketTables;
     }
 }
