@@ -101,7 +101,7 @@ public class TareaController {
         return restTemplate.postForEntity(url, tarea, String.class);
     }
 
-    @PutMapping (path = "/updateTarea/{id_tarea}/{id_ticket}") //
+    @PostMapping (path = "/updateTarea/{id_tarea}/{id_ticket}") //
     //link tarea to ticket
     public void updateTarea(@PathVariable("id_tarea") Integer idTarea, @PathVariable("id_ticket") Integer idTicket) {
 
@@ -109,6 +109,6 @@ public class TareaController {
         final String uri_addTicket = "https://moduloproyectos.herokuapp.com/tareas/" + idTarea + "/tickets/" + idTicket;
 
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.put(uri_addTicket, null);
+        restTemplate.postForEntity(uri_addTicket, null, void.class);
     }
 }
