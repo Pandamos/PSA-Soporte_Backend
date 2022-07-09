@@ -2,7 +2,9 @@ package com.example.demo.producto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class VersionProducto {
+import java.io.Serializable;
+
+public class VersionProducto implements Serializable {
     @JsonProperty("id")
     private Integer id;
     @JsonProperty("numero_version")
