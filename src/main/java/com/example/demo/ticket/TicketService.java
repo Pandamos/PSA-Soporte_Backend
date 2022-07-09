@@ -26,7 +26,7 @@ public class TicketService {
 
 
     //GETTERS
-    public List<TicketTable> getTicketsByVersion(Integer versionId) {
+    public List<TicketTable> getTickets(Integer versionId) {
 
         if(versionId == null){
             return (List<TicketTable>) ticketRepository.findAll();
