@@ -95,7 +95,7 @@ public class TareaController {
         String result = restTemplate.exchange(uri, HttpMethod.POST, headerRequestEntity, String.class).getBody();
 */
         //linkeamos el ticket con la tarea
-        final String uri_addTicket = "https://moduloproyectos.herokuapp.com/tareas/" + tarea.getId() + "/tickets/" + idTicket;
+        final String uri_addTicket = "https://moduloproyectos.herokuapp.com/proyectos/" + tarea.getId() + "/tickets/" + idTicket;
 
 
         RestTemplate restTemplate = new RestTemplate();
