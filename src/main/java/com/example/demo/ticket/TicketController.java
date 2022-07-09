@@ -112,6 +112,7 @@ public class TicketController {
     //devuelve un response entity con el status CREATED y la nueva ticketTable
     public ResponseEntity<TicketTable> createTicket(@RequestBody TicketTable ticketTable, @RequestParam Integer idVersion){
         ticketTable.setVersionId(idVersion);
+        ticketTable.setEstado("abierto");
         TicketTable ticketTableResultado = ticketService.createTicket(ticketTable);
         return new ResponseEntity<>(ticketTableResultado,HttpStatus.CREATED);
     }
