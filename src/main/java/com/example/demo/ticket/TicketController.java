@@ -31,6 +31,8 @@ public class TicketController {
         List<TicketTable> tickets = ticketService.getTickets(versionId);
         return new ResponseEntity<>(tickets, HttpStatus.OK);
     }
+
+
     //Devuelve un ticket en especifico segun el id de ticket que le llega.
     @GetMapping(path = "/ticket/{ticketId}")
     public TicketTable getOneTicket(@PathVariable Integer ticketId){
