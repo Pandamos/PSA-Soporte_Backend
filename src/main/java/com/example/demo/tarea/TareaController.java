@@ -69,17 +69,6 @@ public class TareaController {
     }
 
 
-    @PostMapping(path = "/{id_ticket}/{id_proyecto}/tarea", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<String> createTarea(@PathVariable("id_ticket") Integer ticketId,
-                                              @PathVariable("id_proyecto") Integer proyectoId,
-                                              @RequestBody Tarea tarea) {
-        tarea.setIdTicket(ticketId);
-
-        String url = "https://moduloproyectos.herokuapp.com/proyectos/" + proyectoId + "/tareas";
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForEntity(url, tarea, String.class);
-    }
-
     @PostMapping (path = "/updateTarea/{id_proyecto}/{id_ticket}") //
     //link tarea to ticket
     public void updateTarea(@RequestBody Tarea tarea,
@@ -95,13 +84,26 @@ public class TareaController {
         String result = restTemplate.exchange(uri, HttpMethod.POST, headerRequestEntity, String.class).getBody();
 */
         //linkeamos el ticket con la tarea
-        final String uri_addTicket = "https://moduloproyectos.herokuapp.com/proyectos/" + tarea.getId() + "/tickets/" + idTicket;
+        final String uri_addTicket = "https://moduloproyectos.herokuapp.com/proyectos/tareas" + tarea.getId() + "/tickets/" + idTicket;
 
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.exchange(uri_addTicket, HttpMethod.POST, null, void.class);
 
     }
+
+    @PostMapping(path = "/{id_ticket}/{id_proyecto}/tarea", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<String> createTarea(@PathVariable("id_ticket") Integer ticketId,
+                                              @PathVariable("id_proyecto") Integer proyectoId,
+                                              @RequestBody Tarea tarea) {
+        tarea.setIdTicket(ticketId);
+
+        String url = "https://moduloproyectos.herokuapp.com/proyectos/" + proyectoId + "/tareas";
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.postForEntity(url, tarea, String.class);
+    }
+
+
 
 
 
