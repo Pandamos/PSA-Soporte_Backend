@@ -17,11 +17,11 @@ public class TicketTable implements Serializable {
     private Integer id;
     @Column(name = "CUIT_cliente",length = 50)
     private String cuit;
-    @Column(name = "estado",length = 50)
+    @Column(name = "estado",length = 400)
     private String estado;
-    @Column(name = "titulo",length = 100)
+    @Column(name = "titulo",length = 400)
     private String titulo;
-    @Column(name = "descripcion",length = 250)
+    @Column(name = "descripcion",length = 400)
     private String descripcion;
     @Column(name = "fecha_creacion",length = 50)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
