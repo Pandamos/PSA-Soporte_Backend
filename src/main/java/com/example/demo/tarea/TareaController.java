@@ -69,21 +69,6 @@ public class TareaController {
     }
 
 
-    @PostMapping (path = "/tarea/{id_tarea}/{id_ticket}") //
-    //link tarea to ticket
-    public void updateTarea(@PathVariable("id_tarea") Integer idTarea,
-                            @PathVariable("id_ticket") Integer idTicket) {
-
-        //linkeamos el ticket con la tarea
-        final String uri = "https://moduloproyectos.herokuapp.com/tareas/" + idTarea + "/tickets/" + idTicket;
-
-
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.exchange(uri, HttpMethod.POST, null, void.class);
-
-    }
-
-    /*
     @PostMapping(path = "/{id_ticket}/{id_proyecto}/tarea", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> createTarea(@PathVariable("id_ticket") Integer ticketId,
                                               @PathVariable("id_proyecto") Integer proyectoId,
@@ -95,7 +80,22 @@ public class TareaController {
         return restTemplate.postForEntity(url, tarea, String.class);
     }
 
-*/
+    @PutMapping (path = "/tarea/{id_proyecto}/{id_tarea}/{id_ticket}") //
+    //link tarea to ticket
+    public void updateTarea(@PathVariable("id_proyecto") Integer idProyecto, @PathVariable("id_tarea") Integer idTarea, @PathVariable("id_ticket") Integer idTicket) {
+
+        //linkeamos el ticket con la tarea
+        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + idTarea + "/tickets" + idTicket;
+
+
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.put(uri,null);
+    }
+
+
+
+
+
 
 
 
