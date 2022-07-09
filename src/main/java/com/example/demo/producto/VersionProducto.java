@@ -42,4 +42,11 @@ public class VersionProducto implements Serializable {
         this.caracteristicas = caracteristicas;
     }
 
+    public Integer getProductoId() {
+        return productoId;
+    }
+
+    public void setProductoId(Integer productoId) {
+        this.productoId = productoId;
+    }
 }
