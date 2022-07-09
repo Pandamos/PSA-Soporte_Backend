@@ -85,7 +85,7 @@ public class TareaController {
     public void updateTarea(@PathVariable("id_proyecto") Integer idProyecto, @PathVariable("id_tarea") Integer idTarea, @PathVariable("id_ticket") Integer idTicket) {
 
         //linkeamos el ticket con la tarea
-        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + idTarea + "/tickets" + idTicket;
+        final String uri = "https://moduloproyectos.herokuapp.com/proyectos/" + idProyecto + "/tareas/" + idTarea + "/tickets/" + idTicket;
 
 
         RestTemplate restTemplate = new RestTemplate();
