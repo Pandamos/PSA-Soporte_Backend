@@ -70,14 +70,14 @@ public class TareaController {
 
 
     @PostMapping(path = "/{id_ticket}/{id_proyecto}/tarea", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Tarea> createTarea(@PathVariable("id_ticket") Integer ticketId,
+    public void createTarea(@PathVariable("id_ticket") Integer ticketId,
                                               @PathVariable("id_proyecto") Integer proyectoId,
                                               @RequestBody Tarea tarea) {
         tarea.setIdTicket(ticketId);
 
         String url = "https://moduloproyectos.herokuapp.com/proyectos/" + proyectoId + "/tareas";
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForEntity(url, tarea, Tarea.class);
+        restTemplate.postForEntity(url, tarea, void.class);
     }
 
     @PutMapping (path = "/tarea/{id_proyecto}/{id_tarea}/{id_ticket}") //
