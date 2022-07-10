@@ -1,3 +1,4 @@
+
 Feature: Interacción con tareas
   Scenario: Cliente hace POST a /proyectos/{id_ticket}/{id_proyecto}/tarea
     Given se quiere derivar un ticket
@@ -13,6 +14,5 @@ Feature: Interacción con tareas
     Given se quiere recuperar un tarea
     When se busca una tarea con id conocido 421
     Then se la encuentra
-
 
 

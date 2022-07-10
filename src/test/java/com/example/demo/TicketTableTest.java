@@ -53,6 +53,7 @@ public class TicketTableTest {
         ticketTableAuxiliar.setVersionId(2);
         ticketTableAuxiliar.setTitulo("Titulo ticket 2");
         ticketTableAuxiliar.setLegajoResponsable(15);
+
     }
 
     //crear ticket

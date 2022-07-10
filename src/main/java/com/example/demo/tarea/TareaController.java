@@ -55,7 +55,6 @@ public class TareaController {
                 j++;
             }
         }
-
         return tareas_filtradas;
     }
 
