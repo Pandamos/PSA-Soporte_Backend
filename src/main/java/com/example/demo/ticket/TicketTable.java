@@ -1,12 +1,9 @@
 package com.example.demo.ticket;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jdk.jfr.DataAmount;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.sql.Date;
 
 @Entity
 @Table(name = "ticket_table")
@@ -39,9 +36,8 @@ public class TicketTable implements Serializable {
     public TicketTable() {
     }
 
-    public TicketTable(Integer id, String descripcion, Integer severidad,String fechaDeCreacion,String fechaDeFinalizacion,String CUIT,String estado,Integer versionId, String titulo, Integer legajoResponsable){
+    public TicketTable(String descripcion, Integer severidad,String fechaDeCreacion,String fechaDeFinalizacion,String CUIT,String estado,Integer versionId, String titulo, Integer legajoResponsable){
         super();
-        this.id = id;
         this.descripcion = descripcion;
         this.severidad = severidad;
         this.estado = estado;
@@ -50,6 +46,26 @@ public class TicketTable implements Serializable {
         this.cuit = CUIT;
         this.versionId = versionId;
         this.titulo = titulo;
+        this.legajoResponsable = legajoResponsable;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public Integer getVersionId() {
+        return versionId;
+    }
+
+    public Integer getLegajoResponsable() {
+        return legajoResponsable;
+    }
+
+    public void setLegajoResponsable(Integer legajoResponsable) {
         this.legajoResponsable = legajoResponsable;
     }
 

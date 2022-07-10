@@ -18,7 +18,7 @@ import java.util.Objects;
 public class TicketService {
 
     @Autowired
-    private final TicketRepository ticketRepository;
+    private TicketRepository ticketRepository;
 
     public TicketService(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
