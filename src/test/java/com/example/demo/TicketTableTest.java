@@ -5,7 +5,6 @@ import java.util.*;
 
 import com.example.demo.ticket.TicketRepository;
 import com.example.demo.ticket.TicketTable;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.spring.CucumberContextConfiguration;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
@@ -27,12 +26,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class TicketTableTest {
     private final RestTemplate testRestTemplate = new RestTemplate();
     private TicketTable ticketTableEsperado = new TicketTable();
-    private ArrayList <TicketTable> ticketsEsperados = new ArrayList<>();
     private TicketTable ticketTableAuxiliar = new TicketTable();
     private ResponseEntity<TicketTable> latestResponse;
-    private ResponseEntity<TicketTable[]> latestResponseArray;
-
-    private ObjectMapper objectMapper;
 
     @Autowired
     private TicketRepository ticketRepository;
