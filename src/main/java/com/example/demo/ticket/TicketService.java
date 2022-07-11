@@ -59,7 +59,7 @@ public class TicketService {
             ticket.cerrarTicket();
         }
 
-        if (estado != null && Objects.equals("abrir", estado)) {
+        if (estado != null && Objects.equals("abierto", estado)) {
             ticket.abrirTicket();
         }
 
