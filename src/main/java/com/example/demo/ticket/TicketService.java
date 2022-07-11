@@ -49,18 +49,17 @@ public class TicketService {
     @Transactional
     public TicketTable updateTicket(Integer ticketId, String cuit, String estado, Integer severidad, String fechaVencimiento, String fechaInicial, String descripcion) {
         TicketTable ticketTable = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalStateException("ticket with id" + ticketId + "does not exist"));
-        Ticket ticket = new Ticket(ticketTable);
 
         if (cuit != null && !Objects.equals(ticketTable.getCuit(), cuit)) {
             ticketTable.setCuit(cuit);
         }
 
         if (estado != null && Objects.equals("cerrado", estado)) {
-            ticket.cerrarTicket();
+            ticketTable.setEstado("cerrado");
         }
 
         if (estado != null && Objects.equals("abierto", estado)) {
-            ticket.abrirTicket();
+            ticketTable.setEstado("abierto");
         }
 
         if (severidad != null && !Objects.equals(ticketTable.getSeveridad(), severidad)) {
