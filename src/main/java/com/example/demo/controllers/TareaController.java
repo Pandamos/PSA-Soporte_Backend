@@ -1,5 +1,7 @@
-package com.example.demo.tarea;
+package com.example.demo.controllers;
 
+import com.example.demo.tarea.Proyecto;
+import com.example.demo.tarea.Tarea;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;

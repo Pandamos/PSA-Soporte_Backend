@@ -1,7 +1,9 @@
-package com.example.demo.ticket;
+package com.example.demo.controllers;
 
 import com.example.demo.producto.Producto;
 import com.example.demo.producto.VersionProducto;
+import com.example.demo.ticket.TicketService;
+import com.example.demo.ticket.TicketTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
