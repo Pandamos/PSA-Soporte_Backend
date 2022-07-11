@@ -18,7 +18,7 @@ public class DemoApplication {
 	@Bean
 	public Docket apiDocket() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.any())
+				.apis(RequestHandlerSelectors.basePackage("com.example.demo"))
 				.paths(PathSelectors.any())
 				.build();
 	}
