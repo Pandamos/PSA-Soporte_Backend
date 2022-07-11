@@ -10,4 +10,3 @@ public class Cliente {
     @JsonProperty("CUIT")
     public String CUIT;
 }
-//HOLA COMO ESTAS

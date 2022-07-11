@@ -99,14 +99,17 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
 
-<dependency>
-	<groupId>io.springfox</groupId>
-	<artifactId>springfox-swagger-ui</artifactId>
-	<version>2.9.2</version>
-</dependency>
+
+
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -145,15 +148,7 @@
 				</executions>
 			</plugin>
 
-			<!--<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.17</source>
-					<target>1.17</target>
-				</configuration>
-			</plugin> -->
+
 
 		</plugins>
 

@@ -1,4 +1,3 @@
-
 Feature: Interacción con tickets
   Scenario: Cliente hace POST a /soporte/ticket
     Given soy un cliente
