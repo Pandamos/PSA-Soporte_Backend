@@ -50,20 +50,20 @@ public class TicketController {
         //PRODUCTOS
         Producto productoA = new Producto(
                 14, //id
-                "testing", //fase
-                "Nombre producto A" //nombre
+                "maintenance", //fase
+                "PSA Spring ERP" //nombre
         );
 
         Producto productoB = new Producto(
                 155,
                 "deployed",
-                "Nombre producto B"
+                "PSA Spring CRM"
         );
 
         Producto productoC = new Producto(
                 86,
                 "maintenance",
-                "Nombre producto C"
+                "PSA Business Analytics."
         );
 
         //VERSIONES
